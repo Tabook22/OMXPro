@@ -1,0 +1,462 @@
+/**-----------------------------------------------------------------------------------
+ * General Styling
+ *
+ * Description of section:In this section we are going to style all the general tags
+ ------------------------------------------------------------------------------------*/
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+   
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+img {
+    height: auto;
+    max-width: 100%;
+}
+
+a {
+    color: #2e5481;
+}
+a:visited {
+    color: #7996b7;
+}
+a:active {
+    color: #000;
+}
+
+
+/**-----------------------------------------------------------------------------------
+ * Header and Navigation
+ *
+ * Description of section:This section contains the header styles and the navigation styles
+ ------------------------------------------------------------------------------------*/
+.bar1{
+  background-color: #295288;
+}
+
+.bar2{
+    height: 100px;
+}
+#topbar{z-index:100000;}
+#topbar{
+/*background: rgba(0, 0, 0, 0) none repeat scroll 0 0;*/
+    background-color: #fff;
+    border: 0 none;
+    border-radius: 0;
+    height: auto;
+    margin: 0;
+    min-height: 30px;
+    left: 0;
+    top: 0;
+    position: fixed;
+    width: 100%;
+    margin-top:-38px;
+
+    /* HOVER OFF */
+    -webkit-transition: margin-top 0.2s linear 0s;
+    transition: margin-top 0.2s linear 0s;
+
+}
+
+    #topbar:hover {
+        margin-top: 0px;
+        /* HOVER ON */
+        -webkit-transition: margin-top 0.2s linear 0s;
+        transition: margin-top 0.2s linear 0s;
+    }
+
+    #topbar2 {
+         left: 0;
+    top: 0;
+    position: fixed;
+    }
+
+    #nav_container {
+        width: 100%;
+    }
+
+
+.sitenave{
+height:100px;
+}
+
+.top-navbar-right li {
+    margin-left: 3px;
+    min-height: 40px;
+    width: 40px;
+}
+.top-navbar-right .nav > li a {
+    font-size: 18px;
+text-shadow: none;
+display: block;
+text-decoration: none;
+}
+
+
+.top-navbar .nav > li:hover > a, .top-navbar .nav > li > a:hover {
+    background: #efefef none repeat scroll 0 0;
+    color: #7b7b7b;
+    transition: background 0.2s linear 0s, color 0.2s linear 0s;
+}
+
+.top-navbar-right .nav > li:hover {
+    background: #fff none repeat scroll 0 0;
+    color: #fff;
+}
+.top-navbar-right .navbar-nav > li, .top-navbar-right .navbar-nav {
+    float: left !important;
+}
+
+.top-navbar-right .navbar-nav.navbar-right:last-child {
+    margin-right: -15px !important;
+}
+
+.top-navbar-right .navbar-right {
+    float: right !important;
+    margin-left: -150px !important;
+}
+
+#topbar .top-navbar .nav > li a {
+    color: #fff;
+    min-height: 40px;
+    padding: 8px 0 10px 10px;
+        line-height: 22px;
+    transition: background 0.2s linear 0s, color 0.2s linear 0s;
+}
+
+#topbar > .container {
+    height: 35px;
+}
+
+.top-navbar .nav > li a .fa {
+    font-size: 23px;
+}
+
+#topbar  .navbar-inverse {
+    background-color: rgba(0, 0, 0, 0) ;
+    border-color: rgba(0, 0, 0, 0) ;
+}
+#topbar .navbar {
+    border-radius: 4px;
+    border: 1px solid transparent;
+    margin-bottom: 0px;
+    min-height: 0px;
+    position: relative;
+}
+
+
+/*socials*/
+
+#topbar .top-navbar .nav .btn-twitter:hover {
+    background: #fff none repeat scroll 0 0;
+    color: #55acee;
+}
+
+#topbar .top-navbar .nav .btn-facebook:hover {
+    background: #fff none repeat scroll 0 0;
+    color: #3a5795;
+}
+
+#topbar .top-navbar .nav .btn-linkedin:hover {
+    background: #fff none repeat scroll 0 0;
+    color: #1b92bd;
+}
+
+#topbar .top-navbar .nav .btn-youtube:hover {
+    background: #fff none repeat scroll 0 0;
+    color: #c4302b;
+}
+
+#topbar .top-navbar  .nav > li a .fa {
+    font-size: 23px;
+    font-size: 120%;
+    margin-right: 4px;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+}
+
+/*Site Log*/
+
+.right-box-wrapper {
+    display: table-cell;
+    height: 100px;
+    vertical-align: middle;
+}
+
+.bar2 .logo-box {
+    display: table;
+    table-layout: fixed;
+}
+.bar2 .logo {
+    display: table-cell;
+    height: 100px;
+    max-width: 100%;
+    vertical-align: middle;
+    width: 100%;
+}
+.bar2 .logo a {
+    display: inline-block;
+    max-width: 100%;
+}
+.bar2 .logo img, .header .logo .logo-img {
+    max-height: 100px;
+}
+.bar2 .logo-box.auto-height {
+    display: block;
+    height: 100px;
+}
+.bar2 .logo-box.auto-height .logo {
+    display: block;
+}
+.bar2 .logo-box.auto-height img {
+    max-height: inherit;
+}
+
+/*site menu*/
+.bar2 .right-box {
+    display: table;
+}
+
+.bar2 .header-icons {
+    float: right;
+    margin: 9px 0;
+    text-align: right;
+}
+
+.bar2 .right-box-wrapper{
+position:relative;
+}
+.bar2  .primary .navbar .nav > li > a, .header .primary .navbar .nav > li > a:visited {
+    color: #295288;
+    font-size: 14px;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+}
+.bar2  .primary {
+margin-top:10px;
+margin-bottom: 10px;
+    z-index: 900;
+}
+
+.bar2  .primary .navbar {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: 0 none;
+    margin: 0;
+    min-height: 44px;
+}
+
+.bar2  #header-icons-box .search-header {
+    border-right: medium none !important;
+    margin-left: 12px;
+    margin-top: 15px;
+}
+.search-header a i {
+    font-size: 20px;
+}
+.bar2  .primary .level-2 > a, .header .primary .level-2 > a:visited {
+    color: #295288;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 23px;
+    margin: 25px 0 3px;
+    text-transform: uppercase;
+}
+.bar2  .primary .level-3 > a, .header .primary .level-3 > a:visited {
+    color: #717171;
+}
+.bar2  .primary .megamenu-column-single {
+    padding: 0 15px;
+}
+.bar2  .primary .sub a {
+    min-width: 150px;
+}
+.bar2  .primary .tb-megamenu-column .tb-megamenu-subnav *:first-child a {
+    margin-top: 0;
+}
+
+.bar2 .search-header{
+float:right;
+}
+.bar2 .primary {
+
+float:left;
+}
+
+
+/*Search in top menu*/
+.site-search{
+bottom: 0;
+    margin: 18px 0;
+    overflow: hidden;
+    position: absolute;
+    right: -50px;
+    top: 0;
+    z-index: 920;
+}
+
+.site-search .container{
+margin-right:0px;
+padding-right:0px;
+}
+
+.site-search .frmcontainer{
+margin-right:0px;
+padding-right:0px;
+}
+
+.site-search .row{
+margin-right:0px;
+padding-right:0px;
+}
+.site-search .frmcontainer{
+position:relative;
+}
+
+.site-search .frmcontainer .close {
+    position: absolute;
+    right: 79px;
+top:15px;
+    z-index: 1;
+}
+#custom-search-input{
+    padding: 3px;
+    border: solid 1px #E4E4E4;
+    border-radius: 6px;
+    background-color: #fff;
+}
+
+#custom-search-input input{
+    border: 0;
+    box-shadow: none;
+}
+
+#custom-search-input button{
+    margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 8px 0 10px;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input button:hover{
+    border: 0;
+    box-shadow: none;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input .glyphicon-search{
+    font-size: 23px;
+}
+
+
+
+
+/**-----------------------------------------------------------------------------------
+ * Main Contents
+ *
+ * Description of section
+ ------------------------------------------------------------------------------------*/
+
+/* marketing */
+.marketing-top {
+text-align:center;
+}
+
+.marketing-top h2{
+color:#295288;
+}
+
+.marketing-top p{
+color:#999999;
+}
+
+.marketing-top-img{
+width:200px;
+display:inline-block; 
+text-align:center;
+}
+/* product-block */
+
+.product-block{
+overflow: hidden;
+    padding: 76px 0;
+    position: relative;
+    transition: opacity 0.2s linear 0s;
+box-sizing: border-box;
+}
+
+.pro-bg-fixed {
+    background-attachment: fixed;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    z-index: 0;
+  background-image: url('Images/fond-grandstream.jpg');
+}
+
+.text-center {
+    text-align: center;
+color:#335A91;
+}
+.white-text * {
+    color: #ffffff;
+}
+.caption {
+    color: #7f7f7f;
+    display: inline-block;
+    font-size: 12px;
+    font-style: italic;
+    line-height: 18px;
+    margin-bottom: 22px;
+    max-width: 100%;
+}
+/* article list */
+
+/* advertisement */
+
+
+
+
+
+
+
+/**-----------------------------------------------------------------------------------
+ * Footer
+ *
+ * Description of section
+ ------------------------------------------------------------------------------------*/
+#footer {}
+
+

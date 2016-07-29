@@ -1,0 +1,405 @@
+/*----------------------------------------------------------
+------------Slick Slider------------------------------------
+----------------------------------------------------------*/
+
+.slider-container {
+    bottom: 0;
+    display: block;
+    float: none;
+    height: 100%;
+    left: 0;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    right: 0;
+    text-align: start;
+    top: 0;
+    width: 1200px;
+    z-index: auto;
+}
+
+.slider {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+.item {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    /*padding-left:10px;*/
+    background-color: #fff;
+}
+
+    .item img {
+    }
+
+.controllers {
+    height: 50px;
+    position: relative;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 40px;
+}
+
+.controllers-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 100px;
+}
+
+.btnleft, .btnright {
+    background-color: #ccc;
+    border-radius: 3px;
+    color: #fbfbfb;
+    float: right;
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 0 0 10px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s linear 0s;
+    width: 40px;
+}
+
+    .btnleft:hover {
+        background-color: #2A5389;
+        color: #efefef;
+        text-decoration: none;
+        transition: color 0.2s linear 0s, background-color 0.2s linear 0s;
+    }
+
+    .btnright:hover {
+        background-color: #2A5389;
+        color: #efefef;
+        text-decoration: none;
+        transition: color 0.2s linear 0s, background-color 0.2s linear 0s;
+    }
+
+.controllers-btn span {
+    font-size: 30px;
+    background-color: #000;
+    padding: 4px 8px;
+    color: #fff;
+    margin: 5px;
+}
+
+
+/*----------------------------------------------------------
+------------Flip images in the Slick Slider-----------------
+----------------------------------------------------------*/
+flip-container {
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -o-perspective: 1000;
+    perspective: 1000;
+    border: 1px solid #ccc;
+}
+
+.flip-container:hover .flipper,
+.flip-container.hover .flipper {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.flip-container, .front, .back {
+    width: 100%;
+    height: 400px;
+}
+
+.flipper {
+    -webkit-transition: 0.6s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transition: 0.6s;
+    -moz-transform-style: preserve-3d;
+    -o-transition: 0.6s;
+    -o-transform-style: preserve-3d;
+    transition: 0.6s;
+    transform-style: preserve-3d;
+    margin-right: 10px;
+    position: relative;
+}
+
+.front, .back {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.front {
+    /*background: url(http://davidwalsh.name/demo/dwflip.jpg) 0 0 no-repeat;
+    z-index: 2;*/
+}
+
+
+.flipper .sale::before {
+    color: #fff;
+}
+
+.flipper .sale::before {
+    content: "";
+}
+
+.flipper .sale::before {
+    color: #fff;
+    content: "";
+    display: block;
+    font-size: 11px;
+    font-weight: bold;
+    margin: -46px 0 0 5px;
+    position: absolute;
+    text-transform: uppercase;
+    transform: rotate(315deg);
+}
+
+.flipper .sale {
+    border-top: 56px solid #ff530d;
+}
+
+.flipper .sale {
+    border-right: 56px solid transparent;
+    display: block;
+    height: 0;
+    line-height: 22px;
+    position: absolute;
+    width: 0;
+    z-index: 1;
+}
+
+    .flipper .sale span {
+        color: #fff;
+        display: block;
+        font-size: 11px;
+        font-weight: bold;
+        margin: -46px 0 0 5px;
+        position: absolute;
+        text-transform: uppercase;
+        transform: rotate(315deg);
+    }
+
+.front p {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 0 20px;
+    font-family: arial;
+    line-height: 2em;
+}
+
+.fron img {
+    height: auto;
+    max-width: 100%;
+}
+
+.fron img {
+    vertical-align: middle;
+}
+
+.fron img {
+    border: 0 none;
+}
+
+.back {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    z-index: 46;
+}
+
+.back {
+}
+
+    .back .prodetails {
+        overflow: hidden;
+        color: #fff;
+        height: 383px;
+        background: #295288;
+        display: relative;
+    }
+
+.front .name {
+    font-size: 2em;
+    display: inline-block;
+    background: rgba(33, 33, 33, 0.9);
+    color: #f8f8f8;
+    font-family: Courier;
+    padding: 5px 10px;
+    border-radius: 5px;
+    bottom: 60px;
+    left: 25%;
+    position: absolute;
+    text-shadow: 0.1em 0.1em 0.05em #333;
+    -webkit-transform: rotate(-20deg);
+    -moz-transform: rotate(-20deg);
+    -o-transform: rotate(-20deg);
+    transform: rotate(-20deg);
+}
+
+.back-logo {
+    position: absolute;
+    top: 40px;
+    left: 90px;
+    width: 160px;
+    height: 117px;
+    background: url(http://davidwalsh.name/demo/logo.png) 0 0 no-repeat;
+}
+
+.back-title {
+    font-weight: bold;
+    color: #00304a;
+    position: absolute;
+    top: 180px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    text-shadow: 0.1em 0.1em 0.05em #acd7e5;
+    font-family: Courier;
+    font-size: 2em;
+}
+
+.back p {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 0 20px;
+    font-family: arial;
+    line-height: 2em;
+}
+
+.front .product-description {
+    background: #f2f2f2 none repeat scroll 0 0;
+    border-top: 1px solid #e1e1e1;
+    color: #505050;
+    display: table;
+    font-size: 13px;
+    height: 72px;
+    line-height: 18px;
+    position: relative;
+    text-align: center;
+    width: 270px;
+    z-index: 1;
+}
+
+    .front .product-description .vertical {
+        display: table-cell;
+        height: 72px;
+        padding-left: 5px;
+        padding-right: 5px;
+        vertical-align: middle;
+    }
+
+    .front .product-description .product-name a {
+        color: #505050;
+        display: inline-block;
+        height: 54px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.2s linear 0s;
+        vertical-align: top;
+        font-size: 13px;
+    }
+
+.back .proName {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.back .proImg {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.proName h3 {
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 18px;
+    margin: 0 0 7px;
+}
+
+    .proName h3 a {
+        color: #fff;
+        text-decoration: none;
+        transition: opacity 0.2s linear 0s;
+    }
+
+.proImg img {
+    background: #f7f7f7 none repeat scroll 0 0;
+    border-radius: 2px;
+}
+
+.proInfo {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+}
+
+    .proInfo ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: left;
+        height: 150px;
+        overflow: hidden;
+    }
+
+        .proInfo ul li {
+            background-position: 0 5px;
+            background-repeat: no-repeat;
+            line-height: 20px;
+            list-style: outside none none;
+            padding: 0 0 0 25px;
+            position: relative;
+        }
+
+.more-proInfo {
+    position: absoulte: bottom: 20px;
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+    .more-proInfo a {
+        background: #fff none repeat scroll 0 0;
+        display: inline-block;
+        height: 40px;
+        margin: 0 -2px;
+        padding-top: 19px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.2s linear 0s;
+        vertical-align: top;
+        width: 70px;
+    }
+
+        .more-proInfo a:hover {
+            background: #f2f2f2 none repeat scroll 0 0;
+            transition: all 0.2s linear 0s;
+        }
+
+
+
+
+
+
+
+
+
+
+

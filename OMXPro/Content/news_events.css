@@ -1,0 +1,177 @@
+﻿/*----------------------------------------------------------
+------------News List------------------------------------
+----------------------------------------------------------*/
+
+/*laster news title--------------------------------------*/
+.lstnews-title {
+  border-bottom: 1px solid #e1e1e1;
+  margin-bottom: 40px;
+  position: relative; }
+
+.lstnews-title ::before {
+  background: #1e1e1e none repeat scroll 0 0;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 1px;
+  left: 0;
+  margin: 0 0 -1px;
+  position: absolute;
+  width: 40px; }
+.lstnews-title h3 {
+  color: #7f7f7f;
+  display: inline-block;
+  font-size: 24;
+  font-weight: normal;
+  margin: 0 0 12px;
+  padding: 14px 0 0;
+  text-align: left; }
+.lstnews-title .btnall {
+  background-color: #295288;
+  color: #fff;
+  position: absolute;
+  right: 0;
+  top: 10px; }
+.lstnews-title .btnall:hover {
+  background-color: rgba(76, 107, 153, 0.8); }
+.lstnews-title .btnall:hover {
+  color: #fff;
+  outline: medium none;
+  transition: background 0.2s linear 0s, color 0.2s linear 0s; }
+
+.news-menu {
+  border-bottom: 1px solid #e1e1e1;
+  margin-bottom: 20px; }
+  .news-menu img {
+    float: left;
+    height: 84px;
+    margin: 0 25px 0 0;
+    width: 84px; }
+  .news-menu h4 {
+    color: #7f7f7f;
+    display: block;
+    font-size: 20;
+    font-weight: normal;
+    margin: 0 0 12px;
+    padding: 0 0 0 0;
+    text-align: left; }
+  .news-menu a {
+    background: transparent none repeat scroll 0 0;
+    color: #295288;
+    font-size: 20px;
+    line-height: 1.3;
+    margin: 0;
+    text-decoration: none;
+    transition: opacity 0.2s linear 0s; }
+  .news-menu a:hover {
+    opacity: 0.7;
+    text-decoration: none; }
+  .news-menu .description {
+    border-color: #e1e1e1;
+    border-style: solid;
+    border-width: 0;
+    overflow: hidden; }
+
+/*# sourceMappingURL=newslist.css.map */
+
+
+
+
+/*----------------------------------------------------------
+------------Events Slick Slider------------------------------------
+----------------------------------------------------------*/
+.events-container {
+  bottom: 0;
+  display: block;
+  float: none;
+  height: 600px;
+  left: 0;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+  right: 0;
+  text-align: left;
+  top: 0;
+  width: 100%;
+  z-index: auto; }
+  .events-container .sliderEvents {
+    width: 100%;
+    height: 100%;
+    margin: auto; }
+  .events-container .item {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    /*padding-left:10px;*/
+    background-color: #fff;
+    position: relative;
+    text-align: left; }
+    .events-container .item h4 {
+      text-align: left;
+      font-size: 20px;
+      color: #295288; }
+    .events-container .item .event-date {
+      color: #717171;
+      font-weight: bold;
+      text-align: right; }
+    .events-container .item .img-container {
+      padding: 10px; }
+    .events-container .item img {
+      max-width: 400px;
+      max-height: 300px;
+      margin: auto; }
+    .events-container .item p {
+      color: #295288; }
+    .events-container .item .event-link {
+      text-align: center; }
+  .events-container .controllers::before {
+    background: #1e1e1e none repeat scroll 0 0;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 1px;
+    left: 0;
+    margin: 0;
+    position: absolute;
+    width: 40px; }
+  .events-container .controllers {
+    height: 50px;
+    border-bottom: 1px solid #e1e1e1;
+    margin-bottom: 40px;
+    position: relative; }
+  .events-container .controllers-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 100px; }
+  .events-container .btnleft, .events-container .btnright {
+    background-color: #ccc;
+    border-radius: 3px;
+    color: #fbfbfb;
+    float: right;
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 0 0 10px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s linear 0s;
+    width: 40px; }
+  .events-container .btnleft:hover {
+    background-color: #2A5389;
+    color: #efefef;
+    text-decoration: none;
+    transition: color 0.2s linear 0s, background-color 0.2s linear 0s; }
+  .events-container .btnright:hover {
+    background-color: #2A5389;
+    color: #efefef;
+    text-decoration: none;
+    transition: color 0.2s linear 0s, background-color 0.2s linear 0s; }
+  .events-container .controllers-btn span {
+    font-size: 30px;
+    background-color: #000;
+    padding: 4px 8px;
+    color: #fff;
+    margin: 5px; }
+
+/*# sourceMappingURL=events.css.map */

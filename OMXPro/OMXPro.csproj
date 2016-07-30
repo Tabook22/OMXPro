@@ -203,6 +203,8 @@
     <Compile Include="ViewModels\UserModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\ajax-loader.gif" />
+    <Content Include="Content\bg.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -306,6 +308,7 @@
     <Content Include="Content\fonts\slick.woff" />
     <Content Include="Content\Images\.DS_Store" />
     <Content Include="Content\Images\Thumbs.db" />
+    <Content Include="Content\myStyle.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

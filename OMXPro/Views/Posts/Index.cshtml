@@ -1,0 +1,64 @@
+﻿@model  IEnumerable<OmxTechNet.Models.DB.tbl_post>
+
+@{
+    ViewBag.Title = "List of Main Articles";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2>Articles and News</h2>
+<style>
+    .pdate{
+width:80px;
+    }
+    .pCol{
+        width:120px;
+    }
+    .pCol2{
+        width:50px;
+    }
+</style>
+<p>
+    @Html.ActionLink("Add New Article/News", "Create")
+</p>
+<div class="container">
+    @{
+        var grid = new WebGrid(Model, canPage: true, rowsPerPage: 10);
+        @grid.Pager(WebGridPagerModes.NextPrevious);
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    List of Article
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm())
+                    {
+                        <input type="submit" value="Delete Selected" class="btn" onclick="javascript:return ConfirmDelete();" /><br />
+                        <div class="grid">
+                            @grid.GetHtml(tableStyle: "table ", htmlAttributes: "header",
+        alternatingRowStyle: "alt",
+        columns: grid.Columns(
+        grid.Column(header: "", format: @<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>, style: "pCol2"),
+        grid.Column(header: "", format: @<text><input id="chk" type="checkbox" name="DeleteIds" value="@item.ID" /></text>, style: "pdate"),
+        grid.Column(header: "Date", format: (item) => string.Format("{0:dd/MM/yyyy}", item.post_date), style:"pdate"),
+        grid.Column(header: "Title", format: (item) => Html.Raw("<span>" + item.post_title + "</span>")),
+        grid.Column(header: "", format: @<text><a href="@Url.Action("Edit", "Posts", new { id = item.id })"><img src="../../Content/images/edit.png" alt="" style="border:none;" /></a>|<a href="@Url.Action("Delete", "Posts", new { id = item.id })" onclick="javascript:return ConfirmDelete();"><img src="../../Content/images/delete.png" alt="" style="border:none;" /></a></text>, style: "pCol")
+                                                                                                                                                                                                                                                                                                                                                                                    @*grid.Column(header: "Delete", format: @<text><a href="@Url.Action("Delete", "Contact", new { id = item.id })" onclick="javascript:return ConfirmDelete();"><img src="../../Content/images/delete.png" alt="" style="border:none;" /></a></text>, style: "colOperation")*@
+        ))
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+    function ConfirmDelete() {
+        return confirm("Do you want to delete records.");
+    }
+    </script>
+
+}
+
+

@@ -1,0 +1,296 @@
+﻿@model IEnumerable<OmxTechNet.Models.DB.Social>
+
+@{
+    ViewBag.Title = "addSocialMedia";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    #nasser {
+        margin-top: 10px;
+    }
+
+        #nasser th {
+            text-align: right;
+            background-color: #eee;
+            border-left: 1px solid #ddd;
+        }
+
+        #nasser td {
+            border-left: 1px solid #eee;
+        }
+
+        #nasser th:last-child, td:last-child {
+            border-left: none;
+        }
+</style>
+
+
+<div class="row">
+    <div class="container">
+        <div class="col-md-8" style="background-color:#fff;padding:10px;">
+            <input onclick="DelSocials()" id="btnDelete" class="btn btn-default" value="Delete" title="Delete" type="button">
+            <div id="socialdata">
+
+
+                @{
+                    var grid = new WebGrid(source: ViewBag.Socials, canPage: true, rowsPerPage: 10, canSort: false, ajaxUpdateContainerId: "nasser");
+
+                }
+
+
+                @using (Html.BeginForm("DelSelSocials", "SiteSettings", FormMethod.Post))
+                {
+
+
+                    @grid.GetHtml(htmlAttributes: new { id = "nasser" },
+                                    tableStyle: "table table-condense",
+                                    columns:
+                                    grid.Columns(
+                                    grid.Column(format: @<text><input type="checkbox" id="chkSo" name="ids" value="@item.Id" /> </text>, header: ""),
+                                    grid.Column("Name", "Title"),
+                                    grid.Column("Link", "Url"),
+                                    grid.Column("Order", "Order"),
+                                    grid.Column(header: "Image", format: @<text><img id="socialImg" src="@item.Img" style="width:50px;" /> </text>),
+                                    grid.Column(header: "Edit", format:@<text><a id="btnSlectItem"  class="sedit" data-itemid="@item.Id">Edit</a></text>)
+                           )
+                      )
+
+                }
+
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <h2>Add New Social Site</h2>
+            <hr />
+            <div class="errMsg">
+            </div>
+            @*@using (Html.BeginForm("addSocialMedia", "SiteSettings", FormMethod.Post))
+                {*@
+            <div class="form-horizontal" style="width:400px;">
+                <div class="form-group">
+                    <div class="col-sm-10">
+                        <input id="txtName" type="text" class="form-control" name="txtName" placeholder="Title">
+                    </div>
+                    <label for="txtName" class="col-sm-2 control-label" style="color:#fff;">Title</label>
+
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-10">
+                        <input id="txtLink" type="text" class="form-control" name="txtLink" placeholder="Url">
+                    </div>
+                    <label for="txtLink" class="col-sm-2 control-label" style="color:#fff;">Url</label>
+
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-10">
+                        <input id="txtImg" type="text" class="form-control" name="txtImg" placeholder="Image">
+                    </div>
+                    <label for="txtImg" class="col-sm-2 control-label" style="color:#fff;">Image</label>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-10">
+                        <input id="txtOrder" type="text" class="form-control" name="txtOrder" placeholder="Order">
+                    </div>
+                    <label for="txtOrder" class="col-sm-2 control-label" style="color:#fff;">Order</label>
+
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button id="btnSave" onclick="saveData()" class="btn btn-default">Save</button>
+                        <input onclick="updateData()" id="btnUpdate" class="btn btn-default" value="Update" title="Update" style="display: none" type="button">
+                    </div>
+                    <input type="hidden" id="hfSelectedRecord" value="" />
+                </div>
+            </div>
+            @*}*@
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        //====================================================== select multiple rows for delete =============================================================
+        function DelSocials() {
+            if (confirm("Are you sure to delete records")) {
+                $('#socialdata table tr').each(function () {
+                    if ($(this).find("input[id*='chkSo']").length > 0) {
+                        if ($(this).find("input[id*='chkSo']")[0].checked == true) {
+                            var userID = $(this).find("input[id*='chkSo']").val();
+                            var data = { ID: userID };
+                            var temp = $(this);
+                            $.getJSON("/SiteSettings/DelSocials", data, function (response) {
+                                if (response == true) {
+                                    temp.remove();
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        }
+        //====================================================== Method to save data into database ===========================================================
+        function saveData() {
+            //==== Call validateData() Method to perform validation. This method will return 0
+            //==== if validation pass else returns number of validations fails.
+            var errCount = validateData();
+            //==== If validation pass save the data.
+            if (errCount > 0) {
+
+                $("form").submit(function (e) {
+                    e.preventDefault();
+                });
+            }
+            var txtName = $("#txtName").val();
+            var txtLink = $("#txtLink").val();
+            var txtOrder = $("#txtOrder").val()
+            var txtImg = $("#txtImg").val();
+            //
+            var id = $("#hfSelectedRecord").val();
+            //
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("addSlMedia", "SiteSettings")',// location.pathname + "topNav/saveData",
+                data: "{Name:'" + txtName + "',Link:'" + txtLink + "',Order:'" + txtOrder + "',Img:'" + txtImg + "',id:'" + id + "'}",
+                contentType: "application/json; charset=utf-8",
+                datatype: "jsondata",
+                async: "true",
+                success: function (data) {
+                    $("#socialdata").html(data);
+
+                },
+                error: function (response) {
+                    alert(response.status + ' ' + response.statusText);
+                }
+            });
+            //=== Hide save button and show update button.
+            $("#btnSave").css("display", "block");
+            $("#btnUpdate").hide();
+            //$("#btnDelete").css("display", "block");
+            CleanTxt();
+        }
+        //====================================================== Method to validate textboxes ================================================================
+        function validateData() {
+            var txtName = $("#txtName").val();
+            var txtLink = $("#txtLink").val();
+            var txtOrder = $("#txtOrder").val()
+            var txtImg = $("#txtImg").val();
+
+            var errMsg = "";
+            var errCount = 0;
+            if (txtName.length <= 0) {
+                errCount++;
+                errMsg += "<li>Please enter Social Site Title.</li>";
+            }
+
+            if (txtLink.length <= 0) {
+                errCount++;
+                errMsg += "<li>Please enter Link.</li>";
+            }
+            if (txtOrder.length <= 0) {
+                errCount++;
+                errMsg += "<li>Please enter Order.</li>";
+            }
+
+            if (txtImg.length <= 0) {
+                errCount++;
+                errMsg += "<li>Please enter social site image link.</li>";
+            }
+            if (errCount > 0) {
+
+                $(".errMsg ul").remove()
+                $(".errMsg").append("<ul>" + errMsg + "</ul>");
+                $(".errMsg").slideDown('slow');
+            }
+            return errCount;
+        }
+        //====================================================== Method to bind values of selected record into input controls for update operation ===========
+            $(document).on("click", "#btnSlectItem", function (e) {
+                e.preventDefault();
+                //clean the text field befor using them
+
+                var id = $(this).attr('data-itemid');
+
+                var url = '@Url.Action("showEditData")' + '?id=' + id;
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: "{}",
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "jsondata",
+                    async: "true",
+                    success: function (response) {
+                        //var msg = eval('(' + response.d + ')');
+                        var msg = response;
+                        var opval = msg.ParentId;
+
+                        //fill in the text fields
+                        $("#txtName").val(msg.Name);
+                        $("#txtLink").val(msg.Link);
+                        $("#txtOrder").val(msg.Order);
+                        $("#txtImg").val(msg.img);
+
+                        //=== store id of the selected record in hidden field so that we can use it later during
+                        //=== update process.
+                        $("#hfSelectedRecord").val(id);
+
+                        //=== Hide save button and show update button.
+                        $("#btnSave").hide();
+                        $("#btnUpdate").css("display", "block");
+                        //$("#btnDelete").css("display", "block");
+
+                    },
+                    error: function (response) {
+                        alert(response.status + ' ' + response.statusText);
+                    }
+                });
+            });
+        //====================================================== Clean Text ==================================================================================
+        function CleanTxt() {
+            $("#txtName").val("");
+            $("#txtLink").val("");
+            $("#txtOrder").val("");
+            $("#txtImg").val("");
+
+        }
+        //====================================================== Method to update record =====================================================================
+        function updateData() {
+            var errCount = validateData();
+            //==== If validation pass save the data.
+            if (errCount == 0) {
+                var txtName = $("#txtName").val();
+                var txtLink = $("#txtLink").val();
+                var txtOrder = $("#txtOrder").val()
+                var txtImg = $("#txtImg").val();
+                //
+                var id = $("#hfSelectedRecord").val();
+                //
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("editSocials", "SiteSettings")',// location.pathname + "topNav/saveData",
+                    data: "{Name:'" + txtName + "',Link:'" + txtLink + "',Order:'" + txtOrder + "',Img:'" + txtImg + "',id:'" + id + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "jsondata",
+                    async: "true",
+                    success: function (data) {
+                        $("#socialdata").html(data);
+
+                    },
+                    error: function (response) {
+                        alert(response.status + ' ' + response.statusText);
+                    }
+                });
+                //=== Hide save button and show update button.
+                $("#btnSave").css("display", "block");
+                $("#btnUpdate").hide();
+                //$("#btnDelete").css("display", "block");
+
+                CleanTxt();
+            }
+        }
+    </script>
+
+};

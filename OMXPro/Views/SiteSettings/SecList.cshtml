@@ -1,0 +1,47 @@
+﻿@model IEnumerable<OmxTechNet.Models.tbl_section>
+@{ 
+    Layout = "";
+}
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.sec_title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sec_loc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sec_desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sec_status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.sec_title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sec_loc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sec_desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sec_status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.secId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.secId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.secId })
+        </td>
+    </tr>
+}
+
+</table>

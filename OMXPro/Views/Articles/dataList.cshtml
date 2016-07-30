@@ -1,0 +1,29 @@
+﻿@model OmxTechNet.Models.ViewModel.PostDataModel
+
+@{
+    Layout = "";
+    var grid = new WebGrid(rowsPerPage: Model.PageSize);
+    grid.Bind(Model.mPost, autoSortAndPage: false, rowCount: Model.TotalRecord);
+}
+<div id="mPstContent">
+    @grid.GetHtml(
+        tableStyle: "table table-responsive",
+    columns: grid.Columns(
+                        grid.Column(header: "م", format: @<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),
+                        //grid.Column("Id", "رقم المقالة"),
+                        grid.Column(header: "No.", format: (item) => Html.Raw("<span class='getId'>" + item.Id + "</span>")),
+                        grid.Column(header: "Title", format: (item) => Html.Raw("<a class='getInfo' href='#' data-action='index' data-controller='ArtDetails' style=" + "color:#222;font-weight:bold;" + ">" + item.post_title + "</a>")),
+                        grid.Column(header: "", format: (item) => Html.Raw("<div class='getSm' style=" + "color:#222;font-weight:bold;display:none;" + ">" + item.post_excerpt + "</div>")),
+                        //grid.Column(header: "صورة", format: (item) => Html.Raw("<span class='pstImg'>" + item.post_img + "</span>")),
+                        @*grid.Column(header: "Favorite",format: @<text><a href="@Url.Action("Favorite", "User", new { id = item.Id })">
+                        <img src='@item.post_img' alt="YourText" title="YourText" style="width:32px;height:32px;"></a></text>),*@
+                        grid.Column(header: "", format: @<text><img src='@item.post_img' class="pstImg" alt="No Image" title="YourText" style="width:32px;height:32px;display:none;"></text>),
+                        grid.Column(header: "Status", format: (item) =>item.post_status == 1? Html.Raw("<span style=" + "color:green;font-weight:bold;" + ">Active</span>"): Html.Raw("<span style=" + "color:red;font-weight:bold;" + ">Draft</span>"))
+                       //grid.Column("City", "City"),
+                       //grid.Column("PostalCode", "Postal Code")
+                       )
+               )
+</div>
+@*<div class="pagination pagination-small pagination-right">
+        @grid.PagerList(mode: WebGridPagerModes.All)
+    </div>*@

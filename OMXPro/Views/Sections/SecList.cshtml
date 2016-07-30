@@ -1,0 +1,41 @@
+﻿@model IEnumerable<OmxTechNet.Models.DB.tbl_siteSection>
+@{
+    Layout = "";
+}
+<h3>
+  قائمة الأقسام الرئيسة بالموقع
+</h3>
+<table class="table">
+    <tr>
+        <th>
+          العنوان
+        </th>
+        <th>
+           وصف مختصر
+        </th>
+        <th>
+          الحالة
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.sec_title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sec_desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sec_status)
+        </td>
+        <td>
+            <a href="#" id="btnEdit">تعديل</a>
+            @*@Html.ActionLink("تعديل", null,null, new { id = "btnEdit" })*@ |
+            @Html.ActionLink("حذف", "secDelete", new { secid = item.secId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,117 @@
+﻿@model IEnumerable<OmxTechNet.Models.DB.tbl_siteSection>
+
+@{
+    ViewBag.Title = "Sections";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    var grid = new WebGrid(source: Model, rowsPerPage: 10);
+}
+<style>
+    table.gridtable {
+    }
+</style>
+<h2>Sections</h2>
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div id="sitesections">
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panerl-primary">
+                @*<div class="panel-heading"></div>*@
+                <div class="panel-body">
+                    <div style="border-bottom:1px solid #222; text-align:left;padding-bottom:10px;margin-bottom:10px;">
+                        @Ajax.ActionLink("إضافة قسم جديد", "createNewSection", "SiteSettings", new AjaxOptions
+                   {
+                       HttpMethod = "GET",
+                       UpdateTargetId = "sitesections",
+                       InsertionMode = InsertionMode.Replace
+                   })
+
+
+
+
+                        <table class="tblartlst">
+                            <tr>
+                                <td class="t1">
+                                    @Ajax.ActionLink("إضافة قسم جديد", "createNewSection", "SiteSettings", new AjaxOptions
+                               {
+                                   HttpMethod = "GET",
+                                   UpdateTargetId = "sitesections",
+                                   InsertionMode = InsertionMode.Replace
+                               })
+                                </td>
+                                <td class="t2">
+                                    @Html.DropDownList("mysections") @* this dropdownlist will display the sitemain sections*@
+                                </td>
+                                <td>
+                                    <input type="button" id="btnGetSec" value="إظهار الأقسام" class="btn btn-default" /> @*when this button presse the news and articles within the selected section will be displayed in the <div id="sitesections"> </div>, to do that we used ajax call *@
+                                </td>
+                            </tr>
+                        </table>
+
+
+
+
+                    </div>
+
+                    <div id="seclst">
+
+                    </div>
+
+                    @*@using (Html.BeginForm("DeleteSelected", "SiteSettings", FormMethod.Post))
+                        {
+                            <input type="submit" value="حذف الإقسام" class="btn btn-default" />
+                            @grid.GetHtml(
+                                        tableStyle: "table table-condense",
+                                        columns:
+                                        grid.Columns(
+                                        grid.Column(format: @<text><input type="checkbox" name="ids" value="@item.secId" /> </text>, header: ""),
+                                        grid.Column("secId", "المعرف"),
+                                        grid.Column("sec_title", "عنوان القسم"),
+                                        grid.Column("sec_loc", "الموقع"),
+                                        grid.Column("sec_desc", "وصف مختصر"),
+                                        grid.Column(format:@<text>@Ajax.ActionLink("تعديل", "editSection", "SiteSettings", new { id = @item.secId }, new AjaxOptions
+                                                                                                                             {
+                                                                                                                                 HttpMethod = "GET",
+                                                                                                                                 UpdateTargetId = "sitesections",
+                                                                                                                                 InsertionMode = InsertionMode.Replace
+                                                                                                                             })</text>, header: "تعديل")
+                                                                                                                                        )
+                                                                                                                            )
+
+                        }*@
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#btnGetSec").on("click", function (e) {
+                e.preventDefault();
+                var param = $("#mysections").val();
+                var url = "/Admin/SiteSettings/getSecLst?secid=" + param;
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    dataType: 'html',
+                    success: function (data) {
+                        $('#seclst').html('');
+                        $('#seclst').html(data);
+                    },
+                    error: function (data) {
+                        alert('Error!');
+                    }
+                });
+            });
+        });
+    </script>
+}

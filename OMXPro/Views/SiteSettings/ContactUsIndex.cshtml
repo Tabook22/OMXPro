@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "ContactUsIndex";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>ContactUsIndex</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @{Html.RenderAction("ContactUsList", "SiteSettings");}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

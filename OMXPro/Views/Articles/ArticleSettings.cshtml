@@ -1,0 +1,60 @@
+﻿@model IEnumerable<OmxTechNet.Models.DB.tbl_article >
+@{
+    ViewBag.Title = "Sections";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var grid = new WebGrid(source: Model, rowsPerPage: 10);
+}
+<style>
+    table.gridtable {
+    }
+</style>
+<h2>Article / News List </h2>
+<small>and their location inside the website</small>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div id="sitesections">
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panerl-primary">
+                @*<div class="panel-heading"></div>*@
+                <div class="panel-body">
+                    <div style="border-bottom:1px solid #222; text-align:left;padding-bottom:10px;margin-bottom:10px;">
+                        @Ajax.ActionLink("Add Article / News", "addart", "Articles", new AjaxOptions
+                                                                                            {
+                                                                                                HttpMethod = "GET",
+                                                                                                UpdateTargetId = "sitesections",
+                                                                                                InsertionMode = InsertionMode.Replace
+                                                                                            })
+                    </div>
+                    @using (Html.BeginForm("DeleteArticles", "Articles", FormMethod.Post))
+                    {
+                        <input type="submit" value="Delete Article" class="btn btn-default" />
+                        @grid.GetHtml(
+                                    tableStyle: "table table-condense",
+                                    columns:
+                                    grid.Columns(
+                                    grid.Column(format: @<text><input type="checkbox" name="ids" value="@item.id" /> </text>, header: ""),
+                                    grid.Column("id", "No."),
+                                    grid.Column("a_title", "Article Title/News"),
+                                    grid.Column("a_date", "Date"),
+                                    grid.Column(format:@<text>@Ajax.ActionLink("Edit", "editart", "Articles", new { id = @item.id }, new AjaxOptions
+                                                                                                                         {
+                                                                                                                             HttpMethod = "GET",
+                                                                                                                             UpdateTargetId = "sitesections",
+                                                                                                                             InsertionMode = InsertionMode.Replace
+                                                                                                                         })</text>, header: "Edit")
+                                                                                          )
+                                                                              )
+
+                    }
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</div>

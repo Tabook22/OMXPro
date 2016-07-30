@@ -1,0 +1,198 @@
+﻿@model IEnumerable<OmxTechNet.Models.DB.tbl_article>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@*<h2>إضافة مقالات و أخبار الموقع</h2>*@
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<small>إضافة المقالات و الأخبار و تحديد أماكن هذه المقالات داخل الصفحة الرئيسية</small>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("addart", "SiteSettings", FormMethod.Post, new { id = "frmarticles" }))
+            {
+                <div class="form-horizontal">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.a_title, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(x => x.a_title, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.a_title, "", new { @class = "text-danger" })
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                                        Launch demo modal
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.a_img, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @*@Html.TextBoxFor(x => x.a_img, new { @id = "a_img", @onchange = "onchangeevent();" })*@
+                                    @Html.TextBoxFor(x => x.a_img, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.a_img, "", new { @class = "text-danger" })
+                                    <img id="myimg" src="" alt="" class="img-responsive" style="padding:5px;margin:5px;border:1px solid #eee;" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.a_link, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(x => x.a_link, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(x => x.a_link, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.a_desc, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+
+                                    @*@Html.TextAreaFor(x => x.a_desc, 4, 63, new { @class = "form-control" })*@
+                                    @Html.TextAreaFor(x => x.a_desc, new { @class = "form-control postexcerpt", style = "width: 460px", rows = "6", cols = "60" })
+                                    @*@Html.TextAreaFor(x => x.a_desc, new { @title = "form-control" })*@
+
+                                    @Html.ValidationMessageFor(x => x.a_desc, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.a_loc, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("SectionsName", "[Select]")
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.a_order, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(x => x.a_order, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.a_status, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.a_status, new List<SelectListItem>()
+                        {  new SelectListItem() { Text= "نشطة", Value = "1", Selected =true },
+                         new SelectListItem() { Text= "مسودة", Value = "0" }
+                        }, "  -----إختار حالة المقالة-----  ")
+                                    @Html.ValidationMessageFor(model => model.a_status, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <img id="myimg" src="" alt="" class="img-responsive" />
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+
+                            <input type="submit" value="حفظ الإضافات " class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <div id="demoArea">
+                    @*@{Html.RenderAction("Index", "PostList");}*@
+                    @{Html.RenderAction("GetPostData", "PostList");}
+                </div>
+            </div>
+            <div class="modal-footer">
+                @*@Ajax.ActionLink("EMPLOYEE", "GetPlist", "PostList", new AjaxOptions() { UpdateTargetId = "TabBody" }, new { @class = "btn" })*@
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">خروج</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Content/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var gimg = $("#a_img").val();
+        $("#myimg").attr("src", gimg);
+        $("#a_img").on("change", function () {
+            var getimg = $(this).val();
+            $("#myimg").attr("src", getimg);
+        });
+
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').focus()
+        })
+    });
+</script>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+            //thead th a ---> webgrid header link (sorting) , tfoot a     --> webgrid footer link (paging)
+
+            $("#demoArea").on("click", "thead th a, tfoot a", function (e) {
+                e.preventDefault();
+
+                var param = $(this).attr('href').split('?')[1];
+                var url = '@Url.Action("GetPostData", "PostList")' + '?' + param;
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    data: '',
+                    dataType: 'html',
+                    success: function (data) {
+                        $('#demoArea').html(data);
+                    },
+                    error: function () {
+                        alert('Error!');
+                    }
+                });
+            });
+
+            //get the article title and hyperlink from the popup menu
+            $("#demoArea").on("click", ".getInfo", function (e) {
+                e.preventDefault();
+                var row = $(this).closest('tr'); // get the table row
+                var pId = row.find('.getId'); // get the post id
+                var artId = pId.eq(0).text();
+
+                var pImg = row.find('.pstImg'); // get the post img
+                var pstImg = pImg.eq(0).attr("src");
+
+                var pSm = row.find('.getSm'); // get the post img
+                var pSmm = pSm.eq(0).text();
+
+                var t1 = $(this).text();
+                var action = $(this).data("action");
+                var controller = $(this).data("controller");
+
+                //artId = controller + "/" + action + "/" + artId;
+                $('#a_title').val(t1);
+                $('#a_link').val(controller + "/" + action + "/" + artId);
+                $('#a_img').val(pstImg);
+                $("#a_desc").val(pSmm);
+
+            });
+
+        });
+    </script>
+}

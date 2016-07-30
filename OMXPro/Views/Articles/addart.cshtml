@@ -1,0 +1,210 @@
+﻿@model OmxTechNet.Models.DB.tbl_article
+
+@{
+    ViewBag.Title = "Add New Article";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+      #ilst img{
+        width:10rem;
+    }
+</style>
+
+@*<small>Adding Articles/News in the Main Page</small>*@
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panerl-primary">
+            @*<div class="panel-heading"></div>*@
+            <div class="panel-body">
+                @using (Html.BeginForm("addart", "Articles", FormMethod.Post, new { id = "frmarticles" }))
+            {
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <lable class="control-label col-md-2">
+                                Article Title:
+                            </lable>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(x => x.a_title, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.a_title, "", new { @class = "text-danger" })
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                                    Archive
+                                </button>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <lable class="control-label col-md-2">
+                                Article Image:
+                            </lable>
+                            <div class="col-md-10">
+                                @*@Html.TextBoxFor(x => x.a_img, new { @id = "a_img", @onchange = "onchangeevent();" })*@
+                                @Html.TextBoxFor(x => x.a_img, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.a_img, "", new { @class = "text-danger" })
+                                <img id="myimg" src="" alt="" class="img-responsive" style="padding:5px;margin:5px;border:1px solid #eee;" />
+                                <!-- Button trigger modal -->
+                                <button id="btnImgLst" class="btn btn-primary btn-sm" title="Share this content" data-toggle="modal" data-target="#myModal1">
+                                    <i class="fa fa-file-image-o"></i>Select Image
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <lable class="control-label col-md-2">
+                                Link(url):
+                            </lable>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(x => x.a_link, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.a_link, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <lable class="control-label col-md-2">
+                                Short Description:
+                            </lable>
+                            <div class="col-md-10">
+
+                                @*@Html.TextAreaFor(x => x.a_desc, 4, 63, new { @class = "form-control" })*@
+                                @Html.TextAreaFor(x => x.a_desc, new { @class = "form-control postexcerpt", style = "", rows = "6", cols = "60" })
+                                @*@Html.TextAreaFor(x => x.a_desc, new { @title = "form-control" })*@
+
+                                @Html.ValidationMessageFor(x => x.a_desc, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <lable class="control-label col-md-2">
+                                Article Location:
+                            </lable>
+                            <div class="col-md-10">
+                                @Html.DropDownList("SectionsName", "[Select]")
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <lable class="control-label col-md-2">
+                                Order:
+                            </lable>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(x => x.a_order, new { @class = "form-control" })
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <lable class="control-label col-md-2">
+                                Article Status:
+                            </lable>
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.a_status, new List<SelectListItem>()
+                        {  new SelectListItem() { Text= "Active", Value = "1", Selected =true },
+                         new SelectListItem() { Text= "Draft", Value = "0" }
+                        }, "  -----Select Article Status-----  ")
+                                @Html.ValidationMessageFor(model => model.a_status, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+
+                                <input type="submit" value="Save Chages " class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <div id="demoArea">
+                    @*@{Html.RenderAction("Index", "PostList");}*@
+                    @{Html.RenderAction("GetPostData", "Articles");}
+                </div>
+            </div>
+            <div class="modal-footer">
+                @*@Ajax.ActionLink("EMPLOYEE", "GetPlist", "PostList", new AjaxOptions() { UpdateTargetId = "TabBody" }, new { @class = "btn" })*@
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+       <!-- Modal Select Image -->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:silver">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-share-alt"></i>Itme Image List</h4>
+            </div>
+            <div class="modal-body" style="height:40rem;overflow-y:scroll;">
+                <div id="ItemImgList">
+
+                </div>
+            </div>
+            <div class="modal-footer" style="background-color:silver">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-2.2.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var gimg = $("#a_img").val();
+        $("#myimg").attr("src", gimg);
+        $("#a_img").on("change", function () {
+            var getimg = $(this).val();
+            $("#myimg").attr("src", getimg);
+        });
+
+    });
+</script>
+<script>
+        $(function () {
+            $("#btnImgLst").on("click", function () {
+                $.ajax({
+                    url: "/Images/getItmImages",
+                    type: "GET",
+                    data: "{}",
+                    dataType: "json",
+                    success: function (data) {
+                        var output = $("#ItemImgList");
+                        output.empty();
+                        for (var i = 0; i < data.getImgLst.length ; i++) {
+                            var imglst = data.getImgLst[i];
+                                output.append("<table id=" + "ilst" + " class=" + "table" + ">" +
+                                "<tr class=" + "hdr" + ">" +
+                                "<th>Item Image</th>" +
+                                "<th>Item Image</th>" +
+                                "</tr>" +
+                                "<tr>" +
+                                "<td>"+imglst +  "</td>" +
+                                "<td><img class='selItmLst img-responsive' src=" + imglst + " /></td>" +
+                                "</tr></table>");
+                        }
+                    },
+                    error: function () {
+                        alert("Error!");
+                    }
+                });
+            });
+        });
+</script>

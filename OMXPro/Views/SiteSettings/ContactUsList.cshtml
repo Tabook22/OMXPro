@@ -1,0 +1,59 @@
+﻿@model IEnumerable<OmxTechNet.Models.tbl_contact>
+@{ 
+    Layout = "";
+}
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GSubject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GData)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GSubject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GData)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

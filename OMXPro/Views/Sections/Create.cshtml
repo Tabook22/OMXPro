@@ -1,0 +1,169 @@
+﻿@model OmxTechNet.Models.ViewModel.SectionsViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<h2>Add New Sections</h2>
+<small>Notice: the site is divided into number of sections according the subjects</small>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6" style="background-color:#fff;">
+            <input type="button" id="clickme" value="click" class="btn btn-default"/>
+            <div id="resultMessage">
+
+            </div>
+            <hr />
+            @{Html.RenderAction("SecList", "Sections");}
+        </div>
+        <div class="col-md-6">
+            <div id="panelAdd" class="panel">
+                <div class="panel-heading"></div>
+                <div class="panerl-body" stye="padding:0 10px;">
+                    @using (Html.BeginForm("Create", "Sections", FormMethod.Post, new { id = "frmSiteSec" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal">
+                            <h4>tbl_siteSections</h4>
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.sec_title, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.sec_title, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.sec_title, htmlAttributes: new { @class = "control-label col-md-2" })
+
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    @Html.TextAreaFor(x => x.sec_desc, new { @title = "form-control", style = "height:100px;" })
+                                    @*@Html.TextBoxFor(x => x.a_desc, new { @class = "form-control" })*@
+                                    @Html.ValidationMessageFor(x => x.sec_desc, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(x => x.sec_desc, new { @class = "control-label col-md-2" })
+
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.sec_status, new List<SelectListItem>()
+                        {  new SelectListItem() { Text= "Active", Value = "1", Selected =true },
+                         new SelectListItem() { Text= "Non-Active", Value = "0" }
+                        }, "  -----Choose Status-----  ")
+                                    @Html.ValidationMessageFor(model => model.sec_status, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(x => x.sec_status, new { @class = "control-label col-md-2" })
+
+
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input id="frmsubmit" type="submit" value="Add New Section" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <!-- Panel Add-->
+            <div id="panelEdit" class="panel panel-primary">
+                <div class="panel-heading"></div>
+                <div class="panerl-body">
+                    @using (Html.BeginForm("Edit", "Sections", FormMethod.Post, new { id = "frmSiteSec" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal">
+                            @*@Html.HiddenFor(model => model.secId)*@
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.sec_title, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.sec_title, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.sec_title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.sec_desc, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextAreaFor(x => x.sec_desc, new { @title = "form-control" })
+                                    @*@Html.TextBoxFor(x => x.a_desc, new { @class = "form-control" })*@
+                                    @Html.ValidationMessageFor(x => x.sec_desc, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.sec_status, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.sec_status, new List<SelectListItem>()
+                        {  new SelectListItem() { Text= "Active", Value = "1", Selected =true },
+                         new SelectListItem() { Text= "Non-Active", Value = "0" }
+                        }, "  -----Choose Status-----  ")
+                                    @Html.ValidationMessageFor(model => model.sec_status, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input id="frmsubmit2" type="button" value="Add Changes" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <!-- Panel Edit-->
+        </div>
+
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(function () {
+            $("#panelEdit").hide();
+            $("#clickme").on("click", function (e) {
+                e.preventDefault();
+
+                var getId = $("#secid").val();
+                alert(getId);
+                var JSONString = { id: "10" };//json object
+                var actionUrl = '@Url.Action("secEdit", "Sections")';
+                $("#panelAdd").hide();
+                $("#panelEdit").show();
+                $.ajax({
+                    url: actionUrl,
+                    cache: false,
+                    type: "POST",
+                    data: JSON.stringify(JSONString), //data: JSON.stringify(JSONString),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: "Json",
+                    success: function (data) {
+                        alert("الحمد لله رب العالمين");
+                        //if (data != null) {
+                        //    for (var i = 0; i < data.length; i++) {
+                        //        $("#resultMessage").append("<li>" + data[i].title + " " + data[i].desc + "</li>")
+                        //    }
+                        //}
+                        //var message = data.Message;
+                        //$("#resultMessage").html(message);
+                    },
+                    error: function () {
+                        alert("It didn't work.");
+                        alert(status);
+                    }
+                });
+            });
+
+            $("#frmsubmit2").on("click", function (e) {
+                alert("الحمد لله رب العالمين");
+                $("#panelAdd").show();
+                $("#panelEdit").hide();
+                //e.preventDefault();
+            });
+        });
+    </script>
+}

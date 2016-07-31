@@ -1,0 +1,67 @@
+﻿
+
+<link href="~/Content/css/digitalclock.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+$(document).ready(function() {
+// Create two variable with the names of the months and days in an array
+var monthNames = [ "يناير", "فبراير", "مارس", "إبريل", "مايو", "ينيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر" ];
+var dayNames = ["الأحد", "الإثنين", "الثلاثاء", "الإربعاء", "الخميس", "الجمعة", "السبت"]
+
+// Create a newDate() object
+var newDate = new Date();
+// Extract the current date from Date object
+newDate.setDate(newDate.getDate());
+// Output the day, date, month and year
+$('#dgDate').html(dayNames[newDate.getDay()] + " " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+setInterval(function () {
+    // Create a newDate() object and extract the seconds of the current time on the visitor's
+    var seconds = new Date().getSeconds();
+    // Add a leading zero to seconds value
+    $("#sec").html((seconds < 10 ? "0" : "") + seconds);
+}, 1000);
+
+setInterval(function () {
+    // Create a newDate() object and extract the minutes of the current time on the visitor's
+    var minutes = new Date().getMinutes();
+    // Add a leading zero to the minutes value
+    $("#min").html((minutes < 10 ? "0" : "") + minutes);
+}, 1000);
+setInterval( function() {
+    // Create a newDate() object and extract the hours of the current time on the visitor’s
+    var d = new Date();
+    var hh = d.getHours();
+    var dd = "AM";
+    var h = hh;
+    if (h >= 12) {
+        h = hh-12;
+        dd = "PM";
+    }
+    if (h == 0) {
+        h = 12;
+    }
+    // Add a leading zero to the hours value
+    $("#hours").html((h < 10 ? "0" : "") + h);
+    $("#htype").html(" ( " +dd+" ) ");
+}, 1000);
+
+}); </script>
+    <link rel="dgcanonical" href="./index_files/index.htm">
+
+    <div class="dgcontainer">
+        <div class="clock">
+            <div id="dgDate"></div>
+
+            <ul id="dgclock">
+                <li id="hours"></li>
+                <li id="point">:</li>
+                <li id="min"></li>
+                <li id="point">:</li>
+                <li id="sec"></li>
+                <li id="htype"></li>
+            </ul>
+
+        </div>
+    </div>
+

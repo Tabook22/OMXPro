@@ -1,15 +1,16 @@
-﻿@modelOMXPro.Models.ViewModel.PostDataModel
+﻿@model IEnumerable <OMXPro.Models.tbl_post>
 
 @{
     Layout = "";
-    var grid = new WebGrid(rowsPerPage: Model.PageSize);
-    grid.Bind(Model.mPost, autoSortAndPage: false, rowCount: Model.TotalRecord);
+    var grid = new WebGrid(Model, rowsPerPage: 5);
+    //var grid = new WebGrid(Model);
+    //grid.Bind(Model.mPost, autoSortAndPage: false, rowCount: Model.TotalRecord);
 }
 <div id="mPstContent">
     @grid.GetHtml(
         tableStyle: "table table-responsive",
     columns: grid.Columns(
-                        grid.Column(header: "م", format: @<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),
+                        //grid.Column(header: "م", format: @<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),
                         //grid.Column("Id", "رقم المقالة"),
                         grid.Column(header: "No.", format: (item) => Html.Raw("<span class='getId'>" + item.Id + "</span>")),
                         grid.Column(header: "Title", format: (item) => Html.Raw("<a class='getInfo' href='#' data-action='index' data-controller='ArtDetails' style=" + "color:#222;font-weight:bold;" + ">" + item.post_title + "</a>")),

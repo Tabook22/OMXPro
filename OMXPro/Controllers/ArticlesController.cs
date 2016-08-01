@@ -195,17 +195,24 @@ namespace OmxTechNet.Controllers
         }
         //---------------------------------------------------------------------------------------------------------------------
 
-        public ActionResult GetPostData(int page = 1, string sort = "post_title", string sortdir = "DESC")
+        public ActionResult GetPostData()
         {
-            PostDataModel cdm = new PostDataModel();
-            cdm.PageSize = 10;
-            using (OmxtechDbContext dc = new OmxtechDbContext())
-            {
-                cdm.TotalRecord = dc.tbl_posts.Count();
-                cdm.NoOfPages = (cdm.TotalRecord / cdm.PageSize) + ((cdm.TotalRecord % cdm.PageSize) > 0 ? 1 : 0);
-                cdm.mPost = dc.tbl_posts.OrderBy(x=>x.post_title).Skip((page - 1) * cdm.PageSize).Take(cdm.PageSize).ToList();
-            }
+
+            var cdm = db.tbl_posts.ToList();
+    
             return PartialView("dataList", cdm);
         }
+        //public ActionResult GetPostData(int page = 1, string sort = "post_title", string sortdir = "DESC")
+        //{
+        //    PostDataModel cdm = new PostDataModel();
+        //    cdm.PageSize = 10;
+        //    using (OmxtechDbContext dc = new OmxtechDbContext())
+        //    {
+        //        cdm.TotalRecord = dc.tbl_posts.Count();
+        //        cdm.NoOfPages = (cdm.TotalRecord / cdm.PageSize) + ((cdm.TotalRecord % cdm.PageSize) > 0 ? 1 : 0);
+        //        cdm.mPost = dc.tbl_posts.OrderBy(x => x.post_title).Skip((page - 1) * cdm.PageSize).Take(cdm.PageSize).ToList();
+        //    }
+        //    return PartialView("dataList", cdm);
+        //}
     }
 }

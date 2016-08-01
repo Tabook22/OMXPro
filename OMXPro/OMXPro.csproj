@@ -173,8 +173,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NewsListController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\ProductListController.cs" />
+    <Compile Include="Controllers\ProductSlidingController.cs" />
     <Compile Include="Controllers\SectionsController.cs" />
     <Compile Include="Controllers\SiteSettingsController.cs" />
     <Compile Include="Controllers\SocialsController.cs" />
@@ -708,6 +710,9 @@
     <Content Include="Views\Shared\_Digitalclock.cshtml" />
     <Content Include="Views\Shared\_productList_Top.cshtml" />
     <Content Include="Views\Shared\_productList_Bottom.cshtml" />
+    <Content Include="Views\Shared\_NewsList.cshtml" />
+    <Content Include="Views\Shared\_NewsSliding.cshtml" />
+    <Content Include="Views\Shared\_productSliding.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -715,7 +720,9 @@
     <Folder Include="Content\Images\photo\" />
     <Folder Include="Content\Images\products\" />
     <Folder Include="Content\Images\slider\" />
+    <Folder Include="Views\NewsList\" />
     <Folder Include="Views\ProductList\" />
+    <Folder Include="Views\ProductSliding\" />
     <Folder Include="Views\Socials\" />
   </ItemGroup>
   <ItemGroup>

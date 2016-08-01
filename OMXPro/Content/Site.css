@@ -25,4 +25,8 @@ textarea {
     max-width: 280px;
 }
 
-
+.btn-info {
+    background-color:transparent;
+    border-color: #46b8da;
+    color: #fff;
+}

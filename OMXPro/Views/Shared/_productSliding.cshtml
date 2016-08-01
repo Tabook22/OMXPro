@@ -1,0 +1,47 @@
+﻿@model IEnumerable<OMXPro.Models.tbl_article>
+
+@foreach (var itm in Model)
+{
+
+    <div class="item">
+
+        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
+            <div class="flipper">
+                <span class="sale corner-new"><span>NEW</span></span>
+                <div class="front">
+                    <img style="width:270px;height:270px;" title="@itm.a_title" alt="Omax" src='@Url.Content(@itm.a_img)' />
+
+                    <div class="product-description">
+                        <div class="vertical">
+                            <h3 class="product-name">
+                                <a href="#">@itm.a_title</a>
+                            </h3>
+                            <!--<div class="price"></div>-->
+                        </div>
+                    </div>
+
+                </div>
+                <div class="back">
+                    <div class="prodetails">
+                        <div class="proName">
+                            <h3>
+                                <a href="#">@itm.a_title</a>
+                            </h3>
+                        </div>
+                        <div class="proImg">
+                            <img width="80" height="80" title="@itm.a_title" alt="Omax" src='@Url.Content(@itm.a_img)' />
+                        </div>
+                        <div class="proInfo">
+                           @itm.a_desc
+                            <div class="more-proInfo">
+                                <a href="#">
+                                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

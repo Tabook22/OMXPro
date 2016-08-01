@@ -1,0 +1,31 @@
+﻿@model IEnumerable<OMXPro.Models.tbl_article>
+
+
+
+<!--Starts of news Container -->
+<div class="news-container">
+    <div class="lstnews-title">
+        <h3>Latest News</h3>
+        <input type="button" class="btn btn-Danger btnall" value="All News" />
+    </div>
+    @foreach (var itm in Model)
+    {
+        <div class="news-menu">
+            <img src='@Url.Content(@itm.a_img)' />
+            <div>
+                <h4>
+                    <a href="#">
+                        @itm.a_title -
+                        <span class="time">@itm.a_date</span>
+                    </a>
+                </h4>
+            </div>
+
+            <div class="description">
+                <p>
+                    @itm.a_desc
+                </p>
+            </div>
+        </div>
+    }
+</div>

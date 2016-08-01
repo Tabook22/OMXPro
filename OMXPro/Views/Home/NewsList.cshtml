@@ -3,71 +3,8 @@
 <div class="container" style="padding-top: 50px;">
     <div class="row">
         <div class="col-md-6">
-            <div class="news-container">
-                <!--Starts of news Container -->
-                <div class="lstnews-title">
-                    <h3>Latest News</h3>
-                    <input type="button" class="btn btn-Danger btnall" value="All News" />
-                </div>
-
-                <div class="news-menu">
-                    <img src="http://lorempixel.com/80/80/city" />
-                    <div>
-                        <h4>
-                            <a href="#">
-                                Grandstream's Enterprise IP Phones Validated by BroadSoft -
-                                <span class="time">07.06.2016</span>
-                            </a>
-                        </h4>
-                    </div>
-
-                    <div class="description">
-                        <p>
-                            Through expansion strategy that will make Grandstream’s IP products accessible for deployment
-                            en español
-                            Boston, MA (June 7,
-                        </p>
-                    </div>
-                </div>
-                <div class="news-menu">
-                    <img src="http://lorempixel.com/80/80/city" />
-                    <div>
-                        <h4>
-                            <a href="#">
-                                Grandstream's Enterprise IP Phones Validated by BroadSoft -
-                                <span class="time">07.06.2016</span>
-                            </a>
-                        </h4>
-                    </div>
-
-                    <div class="description">
-                        <p>
-                            Through expansion strategy that will make Grandstream’s IP products accessible for deployment
-                            en español
-                            Boston, MA (June 7,
-                        </p>
-                    </div>
-                </div>
-                <div class="news-menu">
-                    <img src="http://lorempixel.com/80/80/city" />
-                    <div>
-                        <h4>
-                            <a href="#">
-                                Grandstream's Enterprise IP Phones Validated by BroadSoft -
-                                <span class="time">07.06.2016</span>
-                            </a>
-                        </h4>
-                    </div>
-
-                    <div class="description">
-                        <p>
-                            Through expansion strategy that will make Grandstream’s IP products accessible for deployment
-                            en español
-                            Boston, MA (June 7,
-                        </p>
-                    </div>
-                </div>
-            </div><!--End of News Container -->
+            @Html.Action("siteNewsLst", "NewsList")
+            <!--End of News Container -->
         </div>
 
         <!--Starts of Events -->
@@ -85,7 +22,8 @@
                     </div>
                 </div>
                 <div class="sliderEvents">
-                    <div class="item">
+                    @Html.Action("siteNewsSliding", "NewsList")
+                    @*<div class="item">
                         <div class="row">
                             <div class="col-xs-9 col-sm-9 col-md-9">
                                 <h4>
@@ -224,7 +162,7 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
             </div><!--End of Events -->
         </div>

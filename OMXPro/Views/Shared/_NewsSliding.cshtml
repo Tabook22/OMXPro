@@ -1,0 +1,40 @@
+﻿@model IEnumerable<OMXPro.Models.tbl_article>
+
+@foreach (var itm in Model)
+{
+    <div class="item">
+        <div class="row">
+            <div class="col-xs-9 col-sm-9 col-md-9">
+                <h4>
+                    <span>@itm.a_title </span>
+                </h4>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3">
+                <span class="event-date">Event Date:@itm.a_date</span>
+            </div>
+
+        </div>
+        <div class="row center">
+            <div class="col-xs-12 col-md-12 img-container">
+                <img class="" title="OMXproduct 1" alt="Omax" src='@Url.Content(@itm.a_img)' />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <p class="event-details">
+                   @itm.a_desc
+                </p>
+                <!--<div class="price"></div>-->
+            </div>
+        </div>
+        <div class="row center">
+            <div class="col-xs-12 event-link">
+                <a class="btn btn-large btn-primary btn-external-url " href="#" target="_blank">
+                    <i class="fa fa-ticket fa-1x"></i>
+                    Sign up now!
+                </a>
+            </div>
+        </div>
+    </div>
+}

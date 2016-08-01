@@ -1,28 +1,26 @@
 ﻿@model IEnumerable<OMXPro.Models.tbl_article>
-@{
-    Layout = null;
-}
+
 
 <div class="row">
-    @foreach (var itm in Model)
-    {
-        <div class="col-sm-4 col-md-4 col-lg-4" style="padding-right: 40px; padding-left: 40px; text-align:center;">
-            <div class="caption" style="max-width:265px; margin-bottom: 10px;">
-                <img title="" alt="" class="img-rounded" src='@Url.Content(@itm.a_img)'>
-                <div class="description">
+
+        @foreach (var itm in Model)
+        {
+            <div class="col-sm-4 col-md-4 col-lg-4" style="height:400px;padding-right: 40px; padding-left: 40px;padding-bottom: 80px; text-align:center;">
+                <div class="caption" style="max-width:265px; margin-bottom: 10px;">
+                    <img title="" alt="" class="img-rounded" src='@Url.Content(@itm.a_img)' style="max-height:200px;">
+                    <div class="description">
+                    </div>
                 </div>
+                <div class="white-text text-center"><h3 class="title">IP Video Surveillance</h3></div>
+                <p class="rtecenter">
+                    <span style="color:#FFFFFF;">
+                        @itm.a_desc
+                    </span>
+                </p>
+                <a style="text-align:center;" href="/products/ip-video-surveillance" class="btn-info btn-lg btn btn-border">
+                    See products
+                </a>
             </div>
-            <div class="white-text text-center"><h3 class="title">IP Video Surveillance</h3></div>
-            <p class="rtecenter"><span style="color:#FFFFFF;">
-                @itm.a_desc
-                </span></p>
-            <a style="text-align:center;" href="/products/ip-video-surveillance" class="btn-info btn-lg btn btn-border">
-                See products
-            </a>
-        </div>
-    }
+        }
 
-
-    
-   
 </div>

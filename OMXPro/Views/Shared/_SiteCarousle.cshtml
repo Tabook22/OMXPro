@@ -1,0 +1,12 @@
+﻿@model IEnumerable<OMXPro.Models.tbl_article>
+<div class="container">
+    <div id="slick">
+        @foreach (var itm in Model)
+        { <div>
+            <div class="img--holder" style="background-image: url(@Url.Action(@itm.a_img));"></div>
+        </div>
+        }
+    </div>
+    <!-- /#slick -->
+</div>
+<!-- /.container -->

@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminHomeController.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
+    <Compile Include="Controllers\CarouselController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -713,6 +714,7 @@
     <Content Include="Views\Shared\_NewsList.cshtml" />
     <Content Include="Views\Shared\_NewsSliding.cshtml" />
     <Content Include="Views\Shared\_productSliding.cshtml" />
+    <Content Include="Views\Shared\_SiteCarousle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -720,6 +722,7 @@
     <Folder Include="Content\Images\photo\" />
     <Folder Include="Content\Images\products\" />
     <Folder Include="Content\Images\slider\" />
+    <Folder Include="Views\Carousel\" />
     <Folder Include="Views\NewsList\" />
     <Folder Include="Views\ProductList\" />
     <Folder Include="Views\ProductSliding\" />

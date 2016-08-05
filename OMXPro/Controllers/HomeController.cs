@@ -8,6 +8,11 @@ namespace OMXPro.Controllers
 {
     public class HomeController : Controller
     {
+
+        public ActionResult Index_Draft()
+        {
+            return View();
+        }
         public ActionResult Index()
         {
             return View();

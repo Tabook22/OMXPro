@@ -1,0 +1,35 @@
+﻿@model IEnumerable<OMXPro.Models.tbl_article>
+
+  <!-- SLIDER -->
+
+<header class="text-center">
+
+    <!-- SLIDER -->
+
+    <div class="row fullwidth">
+
+        <div class="columns small-12 sliderTop">
+            @foreach (var itm in Model)
+            {
+                <div class="text-center slide" style="background-image: url('../..@Url.Content(@itm.a_img)');position:relative;">
+                    <div class="btext" style="background-color:rgba(0,0,0,0.5);">
+                        <h1>@itm.a_title</h1>
+                        <p>@itm.a_desc</p>
+                    </div>
+
+                </div>
+            }
+        </div>
+
+    </div>
+</header>
+@*<div class="container">
+    <div id="slick">
+        <div>
+            <div class="img--holder" style="background-image: url('http://placehold.it/1600x650&text=[Slide1]');height:100vh;"></div>
+        </div>
+        }
+    </div>
+    <!-- /#slick -->
+</div>
+<!-- /.container -->*@

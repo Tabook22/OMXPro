@@ -205,6 +205,7 @@
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\SectionsViewModel.cs" />
     <Compile Include="ViewModels\UserModel.cs" />
+    <Compile Include="ViewModels\VMHeader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\AdminPages\bootstrap\css\bootstrap.css" />
@@ -219,6 +220,7 @@
     <Content Include="Content\AdminPages\css\fullcalendar.css" />
     <Content Include="Content\AdminPages\css\fullcalendar.print.css" />
     <Content Include="Content\AdminPages\css\login.css" />
+    <Content Include="Content\AdminPages\css\magnific-popup.css" />
     <Content Include="Content\AdminPages\css\main.css" />
     <Content Include="Content\AdminPages\css\register.css" />
     <Content Include="Content\AdminPages\css\table.css" />
@@ -243,6 +245,13 @@
     <Content Include="Content\AdminPages\images\sep-half.png" />
     <Content Include="Content\AdminPages\images\slide01.png" />
     <Content Include="Content\AdminPages\images\slide02.png" />
+    <Content Include="Content\AdminPages\images\Socials\vector-free-social-media-icons_10.png" />
+    <Content Include="Content\AdminPages\images\Socials\vector-free-social-media-icons_19.png" />
+    <Content Include="Content\AdminPages\images\Socials\vector-free-social-media-icons_20.png" />
+    <Content Include="Content\AdminPages\images\Socials\vector-free-social-media-icons_23.png" />
+    <Content Include="Content\AdminPages\images\Socials\vector-free-social-media-icons_32.png" />
+    <Content Include="Content\AdminPages\images\Socials\vector-free-social-media-icons_34.png" />
+    <Content Include="Content\AdminPages\images\Socials\vector-free-social-media-icons_36.png" />
     <Content Include="Content\AdminPages\images\up-small.png" />
     <Content Include="Content\AdminPages\images\up.png" />
     <Content Include="Content\AdminPages\images\user-avatar.jpg" />
@@ -261,8 +270,10 @@
     <Content Include="Content\AdminPages\js\jquery-ui-1.8.23.custom.min.js" />
     <Content Include="Content\AdminPages\js\jquery.flexslider.js" />
     <Content Include="Content\AdminPages\js\jquery.js" />
+    <Content Include="Content\AdminPages\js\jquery.magnific-popup.min.js" />
     <Content Include="Content\AdminPages\js\jquery.validate.js" />
     <Content Include="Content\AdminPages\js\lineandbars.js" />
+    <Content Include="Content\AdminPages\js\myPopScript.js" />
     <Content Include="Content\AdminPages\js\noty\jquery.noty.js" />
     <Content Include="Content\AdminPages\js\noty\layouts\bottom.js" />
     <Content Include="Content\AdminPages\js\noty\layouts\bottomCenter.js" />
@@ -712,6 +723,10 @@
     <Content Include="Views\Shared\_NewsSliding.cshtml" />
     <Content Include="Views\Shared\_productSliding.cshtml" />
     <Content Include="Views\Shared\_SiteCarousle.cshtml" />
+    <Content Include="Views\Images\SiteLogo.cshtml" />
+    <Content Include="Views\Shared\_imageList.cshtml" />
+    <Content Include="Views\Images\_siteimg.cshtml" />
+    <Content Include="Views\Home\_Socials.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

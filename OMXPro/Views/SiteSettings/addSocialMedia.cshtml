@@ -52,12 +52,12 @@
                                     grid.Column("Link", "Url"),
                                     grid.Column("Order", "Order"),
                                     grid.Column(header: "Image", format: @<text><img id="socialImg" src="@item.Img" style="width:50px;" /> </text>),
-                                    grid.Column(header: "Edit", format:@<text><a id="btnSlectItem"  class="sedit" data-itemid="@item.Id">Edit</a></text>)
+                                    grid.Column(header: "Edit", format:@<text><a id="btnSlectItem" class="sedit" data-itemid="@item.Id">Edit</a></text>)
                            )
                       )
 
                 }
-
+                
             </div>
 
         </div>
@@ -103,6 +103,52 @@
                     </div>
                     <input type="hidden" id="hfSelectedRecord" value="" />
                 </div>
+            </div>
+            <div style="border-top:2px solid #222;padding-top:20px;background-color:#fff;">
+                <p>
+                    please select from the following templates:
+                </p>
+                <table>
+                    <tr>
+
+                        <td>
+                            fa fa-twitter-square
+                        </td>
+                        <td>
+                            <img src="~/Content/AdminPages/images/Socials/vector-free-social-media-icons_19.png" />
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            fa fa-facebook-square
+                        </td>
+                        <td>
+
+                            <img src="~/Content/AdminPages/images/Socials/vector-free-social-media-icons_10.png" />
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            fa fa-youtube-square
+                        </td>
+                        <td>
+
+                            <img src="~/Content/AdminPages/images/Socials/vector-free-social-media-icons_34.png" />
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            fa fa-linkedin-square
+                        </td>
+                        <td>
+                            <img src="~/Content/AdminPages/images/Socials/vector-free-social-media-icons_20.png" />
+
+                        </td>
+                    </tr>
+                </table>
             </div>
             @*}*@
         </div>
@@ -208,46 +254,46 @@
             return errCount;
         }
         //====================================================== Method to bind values of selected record into input controls for update operation ===========
-            $(document).on("click", "#btnSlectItem", function (e) {
-                e.preventDefault();
-                //clean the text field befor using them
+        $(document).on("click", "#btnSlectItem", function (e) {
+            e.preventDefault();
+            //clean the text field befor using them
 
-                var id = $(this).attr('data-itemid');
+            var id = $(this).attr('data-itemid');
 
-                var url = '@Url.Action("showEditData")' + '?id=' + id;
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: "{}",
-                    contentType: "application/json; charset=utf-8",
-                    datatype: "jsondata",
-                    async: "true",
-                    success: function (response) {
-                        //var msg = eval('(' + response.d + ')');
-                        var msg = response;
-                        var opval = msg.ParentId;
+            var url = '@Url.Action("showEditData")' + '?id=' + id;
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                datatype: "jsondata",
+                async: "true",
+                success: function (response) {
+                    //var msg = eval('(' + response.d + ')');
+                    var msg = response;
+                    var opval = msg.ParentId;
 
-                        //fill in the text fields
-                        $("#txtName").val(msg.Name);
-                        $("#txtLink").val(msg.Link);
-                        $("#txtOrder").val(msg.Order);
-                        $("#txtImg").val(msg.img);
+                    //fill in the text fields
+                    $("#txtName").val(msg.Name);
+                    $("#txtLink").val(msg.Link);
+                    $("#txtOrder").val(msg.Order);
+                    $("#txtImg").val(msg.img);
 
-                        //=== store id of the selected record in hidden field so that we can use it later during
-                        //=== update process.
-                        $("#hfSelectedRecord").val(id);
+                    //=== store id of the selected record in hidden field so that we can use it later during
+                    //=== update process.
+                    $("#hfSelectedRecord").val(id);
 
-                        //=== Hide save button and show update button.
-                        $("#btnSave").hide();
-                        $("#btnUpdate").css("display", "block");
-                        //$("#btnDelete").css("display", "block");
+                    //=== Hide save button and show update button.
+                    $("#btnSave").hide();
+                    $("#btnUpdate").css("display", "block");
+                    //$("#btnDelete").css("display", "block");
 
-                    },
-                    error: function (response) {
-                        alert(response.status + ' ' + response.statusText);
-                    }
-                });
+                },
+                error: function (response) {
+                    alert(response.status + ' ' + response.statusText);
+                }
             });
+        });
         //====================================================== Clean Text ==================================================================================
         function CleanTxt() {
             $("#txtName").val("");

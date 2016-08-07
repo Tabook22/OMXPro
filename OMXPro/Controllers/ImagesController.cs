@@ -134,5 +134,52 @@ namespace OmxTechNet.Controllers
             file2.Delete();
             return RedirectToAction("Index");
         }
+
+        //TODO: Adding Site Logo
+        public ActionResult SiteLogo()
+        {
+            ViewBag.CurrentPage = 1;
+            ViewBag.LastPage =Math.Ceiling(Convert.ToDouble(db.tbl_images.ToList().Count())/ 5); //here we divid the total pages by page size then we used math.celling method to get the upper value (e.g 11/5=2.2, the upper value here is 3 so with math.celling we get 11/5=3)
+            return PartialView(db.tbl_images.Take(5));
+        }
+
+        [HttpPost]
+        public ActionResult SiteLogo(int CurrentPage, int LastPage)
+        {
+            ViewBag.CurrentPage = CurrentPage; //to update the viewbage with the new values
+            ViewBag.LastPage = LastPage;
+            return PartialView("_imageList",db.tbl_images.OrderBy(x => x.imgid).Skip((CurrentPage - 1) * 5).Take(5));
+        }
+        //TODO: Get Image List
+        public ActionResult imageList()
+        {
+            ViewBag.CurrentPage = 1;
+            return PartialView("imageList",db.tbl_images.Take(5));
+        }
+        [HttpPost]
+        public ActionResult imageLis(int CurrentPage)
+        {
+            ViewBag.CurrentPage = CurrentPage;
+            return PartialView("imageList", db.tbl_images.OrderBy(x=>x.imgid).Skip((CurrentPage - 1) * 5).Take(5));
+        }
+
+        //TODO:Display Site Logo
+        public ActionResult DisplaySiteLogoImg()
+        {
+            var getsitelog = db.tbl_images.Where(x => x.imgrole == "SiteLogo").FirstOrDefault();
+            return PartialView("_siteimg",getsitelog);
+        }
+        //TODO:Save Site Logo
+        //TODO:Display Site Logo
+        [HttpPost]
+        public JsonResult SaveSiteLogoImg(string imgurl)
+        {
+            tbl_image myimg =db.tbl_images.Where(x=>x.imgrole =="SiteLogo").FirstOrDefault();
+            myimg.imgurl_lg = imgurl;
+            db.SaveChanges();
+
+            return Json("الحمد لله رب العالمين",JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

@@ -1,0 +1,228 @@
+﻿@model IEnumerable<OMXPro.Models.tbl_image>
+
+@{
+    ViewBag.Title = "SiteLogo";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+
+    .imglst-popup {
+        color: #000;
+        position: relative;
+        background: #FCF8E3;
+        padding: 25px;
+        width: auto;
+        max-width: 800px;
+        max-height: 700px;
+        /*overflow: scroll;*/
+        margin: 0 auto;
+    }
+
+
+    .mfp-newspaper .mfp-with-anim {
+        opacity: 0;
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.5s;
+        transform: scale(0) rotate(500deg);
+    }
+
+    .mfp-newspaper.mfp-bg {
+        opacity: 0;
+        transition: all 0.5s;
+    }
+
+    .mfp-newspaper.mfp-ready .mfp-with-anim {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+
+    .mfp-newspaper.mfp-ready.mfp-bg {
+        opacity: 0.8;
+    }
+
+    .mfp-newspaper.mfp-removing .mfp-with-anim {
+        transform: scale(0) rotate(500deg);
+        opacity: 0;
+    }
+
+    .mfp-newspaper.mfp-removing.mfp-bg {
+        opacity: 0;
+    }
+</style>
+<h2>Site Logo</h2>
+
+<div class="row">
+    <div class="col-md-6 alert alert-warning">
+        <h4>Please Select Site Log</h4>
+        <hr />
+
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label for="" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <img id="myimg" src="http://placehold.it/300x43" alt="" class="img-thumbnail slog" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="a_img" class="col-sm-2 control-label">Url:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="a_img" placeholder="site logo">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <!-- Button trigger modal -->
+                    <button type="button" id="pop2" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                        Select Images
+                    </button>
+                    <button type="button" id="save-img" class="btn btn-primary btn-lg">
+                       Save Current Image
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-6 alert alert-warning">
+        <h4>The Current Site Log</h4>
+        <hr />
+        @Html.Action("DisplaySiteLogoImg","Images");
+        @*<h4>Current Image</h4>
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label for="" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <img id="myimg" src="http://placehold.it/300x43" alt="" class="img-thumbnail slog" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="a_img" class="col-sm-2 control-label">Url:</label>
+                <div class="col-sm-10">
+                    <span class="form-control" id="spa_img"> </span>
+                </div>
+            </div>
+
+
+        </div>*@
+    </div>
+</div>
+
+<!--Modal-->
+@*<div id="#popup2" class="green-popup mfp-with-anim mfp-hide">
+        <div id="imgLst">
+            @Html.Partial("_imageList", Model)
+        </div>
+
+        <div style="margin:20px;">
+            @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "imgLst" }))
+            {
+                <input type="hidden" id="CurrentPage" name="CurrentPage" value="@ViewBag.CurrentPage" />
+                <input type="hidden" id="LastPage" name="LastPage" value="@ViewBag.LastPage" />
+            }
+            <input type="button" class="btn btn-default" id="Previous" value="Previous" />
+            <input type="button" class="btn btn-default" id="Next" value="Next" />
+        </div>
+    </div>*@
+<div id="popup2" class="imglst-popup mfp-with-anim mfp-hide">
+    <div id="imgLst">
+        @Html.Partial("_imageList", Model)
+    </div>
+    <div style="margin:20px;">
+        @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "imgLst" }))
+            {
+            <input type="hidden" id="CurrentPage" name="CurrentPage" value="@ViewBag.CurrentPage" />
+                <input type="hidden" id="LastPage" name="LastPage" value="@ViewBag.LastPage" />
+        }
+        <input type="button" class="btn btn-default" id="Previous" value="Previous" />
+        <input type="button" class="btn btn-default" id="Next" value="Next" />
+    </div>
+
+</div>
+
+
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            var gimg = $("#a_img").val();
+            $("#myimg").attr("src", gimg);
+            $("#a_img").on("change", function () {
+                var getimg = $(this).val();
+                $("#myimg").attr("src", getimg);
+            });
+        });
+
+    </script>
+
+    
+    <script type="text/javascript">
+        //this is used for the popup image list
+        $(function () {
+            $("#Previous").on("click", function (e) {
+                e.preventDefault();
+                if (CalculateAndSetPage("Previous")); // if it returns ture only then submit the form
+                $("form").submit();
+            });
+            $("#Next").on("click", function (e) {
+                e.preventDefault();
+                if (CalculateAndSetPage("Next"));// if it returns ture only then submit the form
+                $("form").submit();
+            });
+
+        });
+
+
+
+        function CalculateAndSetPage(movingType) {
+            var currentPage = parseInt($("#CurrentPage").val());
+            var lastPage = parseInt($("#LastPage").val());
+            //check to see if we are at the first page
+            if (currentPage == 1 && movingType == "Previous") {
+                return false;
+            }
+            //check to see if we are at the last page
+            if (currentPage == lastPage && movingType == "Next") {
+                return false;
+            }
+            if (movingType == "Previous") {
+                currentPage--;
+
+            }
+            else if (movingType == "Next") {
+                currentPage++;
+            }
+            else {
+                alert("أستغفر الله و أتوب إلية");
+            }
+
+            $("#CurrentPage").val(currentPage);
+
+            return true;
+        }
+
+        $(function () {
+
+            $("#save-img").on("click", function () {
+                var gimg = $("#a_img").val();
+                var url = '@Url.Action("SaveSiteLogoImg", "Images")' + '?imgurl=' + gimg;
+                jQuery.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {},
+                    success: function (data) {
+                        alert("Image Has Been Added Successfully")
+                        var simg = $("#spa_img").val();
+                        $("#cmyimg").attr("src", gimg);
+                        
+                    }
+                });
+            });
+        });
+    </script>
+
+}
+

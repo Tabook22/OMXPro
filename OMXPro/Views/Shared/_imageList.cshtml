@@ -1,0 +1,19 @@
+﻿@model IEnumerable<OMXPro.Models.tbl_image>
+<table>
+    <thead>
+        <tr>
+            <th>Image Url</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var itm in Model)
+        {
+            <tr>
+                <td>@Url.Content(@itm.imgurl_lg)</td>
+                <td><img src='@Url.Content(@itm.imgurl_lg)' style="width:60px;" /></td>
+            </tr>
+        }
+
+    </tbody>
+</table>

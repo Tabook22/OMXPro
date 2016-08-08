@@ -1,15 +1,23 @@
 ﻿@model IEnumerable<OMXPro.Models.Social>
-
 <ul class="nav navbar-nav navbar-right">
     <!-- OMX social links -->
     @foreach (var itm in Model)
+    {if (Model != null && !String.IsNullOrEmpty(itm.img))
     {
+
         <li>
             <a class="btn-facebook" target="_blank" href='@itm.Link'><i class="@itm.img"></i></a>
-        </li>
+        </li>}
+    else
+    {
+<li>
+    
+</li>
+    }
     }
 
     @*<li> <a class="btn-twitter" target="_blank" href="https://twitter.com/GrandstreamNet"><i class="fa fa-twitter-square"></i></a></li>
-    <li> <a class="btn-linkedin" target="_blank" href="http://www.linkedin.com/company/grandstream-networks"><i class="fa fa-linkedin-square"></i></a></li>
-    <li> <a class="btn-youtube" target="_blank" href="http://www.youtube.com/user/GrandstreamNetworks"><i class="fa fa-youtube-square"></i></a></li>*@
+        <li> <a class="btn-linkedin" target="_blank" href="http://www.linkedin.com/company/grandstream-networks"><i class="fa fa-linkedin-square"></i></a></li>
+        <li> <a class="btn-youtube" target="_blank" href="http://www.youtube.com/user/GrandstreamNetworks"><i class="fa fa-youtube-square"></i></a></li>*@
 </ul>
+

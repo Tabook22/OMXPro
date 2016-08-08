@@ -4,34 +4,37 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <style>
-   #mPstContent{
-        background-color:#fff;
+    #mPstContent {
+        background-color: #fff;
+        padding:10px;
     }
 </style>
 <h2>Image List</h2>
-
 <div class="row">
     <div class="col-md-12">
-
-       @{
-           var grid = new WebGrid(Model, canPage: true, rowsPerPage: 10);
-           grid.Pager(WebGridPagerModes.NextPrevious);
-    }
-    <div id="mPstContent">
-        @grid.GetHtml(
+        @{
+            var grid = new WebGrid(Model, canPage: true, rowsPerPage: 10);
+            grid.Pager(WebGridPagerModes.NextPrevious);
+        }
+        <div id="mPstContent">
+            @using (Html.BeginForm("DeleteImage", "Images", FormMethod.Post))
+            {
+                @grid.GetHtml(
         tableStyle: "table table-responsive",
     columns: grid.Columns(
                         grid.Column(header: "NO.", format: @<text><div>@(item.WebGrid.Rows.IndexOf(item) + 1)</div></text>),
+                        grid.Column(format:@<text><input type="checkbox" name="ids" value="@item.imgid" /></text>, header: "Select"),
                         grid.Column(header: "Image Url", format: (item) => Html.Raw("<span>" + item.imgurl_lg + "</span>")),
-                        grid.Column(header: "Image", format: @<text><img src='@item.imgurl_lg' class="pstImg" alt="@item.imgurl_lg" title="YourText" style="width:60px;height:60px;"> </text>),
-                        grid.Column("", style: "button", format: @<text>
-                            <a href='@Url.Action("DeleteImage","Images",new{id=item.imgid})' , onclick="return confirm('Are you sure you wish to delete this image?');">
-                                <img src="~/Content/Images/delete.png" style="width:2rem;" />
-                            </a>
-                        </text>)
+                        grid.Column(header: "Image", format: @<text><img src='@item.imgurl_lg' class="pstImg" alt="@item.imgurl_lg" title="YourText" style="width:60px;height:60px;"> </text>)
+                       @* grid.Column("", style: "button", format: @<text>
+    <a href='@Url.Action("DeleteImage","Images",new{id=item.imgid})' , onclick="return confirm('Are you sure you wish to delete this image?');">
+        <img src="~/Content/Images/delete.png" style="width:2rem;" />
+    </a>
+                </text>)*@
                            )
                      )
-    </div>
-
+            <input type="submit" value="Delete Selected" />
+            }
+        </div>
     </div>
 </div>

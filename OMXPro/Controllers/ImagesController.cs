@@ -119,19 +119,35 @@ namespace OmxTechNet.Controllers
             return Json(new { getImgLst }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult DeleteImage(int id)
+        //TODO:Delete Multiple Records
+        [HttpPost]
+        public ActionResult DeleteImage(IEnumerable<int> ids)
         {
-            string getImgUrl_lg = Server.MapPath(db.tbl_images.Where(x => x.imgid.Equals(id)).FirstOrDefault().imgurl_lg); //get large image
-            string getImgUrl_th = Server.MapPath(db.tbl_images.Where(x => x.imgid.Equals(id)).FirstOrDefault().imgurl_th); //get thumbnail image
-            tbl_image imgItm = db.tbl_images.Find(id);
-            db.tbl_images.Remove(imgItm);
-            db.SaveChanges();
+            
+            if (ids != null)
+            {
+  List<tbl_image> lst = db.tbl_images.Where(x => ids.Contains(x.imgid)).ToList();
+            foreach (tbl_image item in lst)
+            {
+                //get the names of the images you want to delete from the folders, because as we want to delete images from the database we also need to 
+                //delete them from the folders
+                string getImgUrl_lg = Server.MapPath(db.tbl_images.Where(x => x.imgid.Equals(item.imgid)).FirstOrDefault().imgurl_lg); //get large image
+                string getImgUrl_th = Server.MapPath(db.tbl_images.Where(x => x.imgid.Equals(item.imgid)).FirstOrDefault().imgurl_th); //get thumbnail image
 
-            //delete image from upload folder
-            FileInfo file1 = new FileInfo(getImgUrl_lg);
-            FileInfo file2 = new FileInfo(getImgUrl_th);
-            file1.Delete();
-            file2.Delete();
+                //delete the image from the database
+                db.tbl_images.Remove(item);
+
+                //delete image from upload folder
+                FileInfo file1 = new FileInfo(getImgUrl_lg);
+                FileInfo file2 = new FileInfo(getImgUrl_th);
+                file1.Delete();
+                file2.Delete();
+            }
+            db.SaveChanges();
+            }
+          
+
+
             return RedirectToAction("Index");
         }
 
@@ -139,7 +155,7 @@ namespace OmxTechNet.Controllers
         public ActionResult SiteLogo()
         {
             ViewBag.CurrentPage = 1;
-            ViewBag.LastPage =Math.Ceiling(Convert.ToDouble(db.tbl_images.ToList().Count())/ 5); //here we divid the total pages by page size then we used math.celling method to get the upper value (e.g 11/5=2.2, the upper value here is 3 so with math.celling we get 11/5=3)
+            ViewBag.LastPage = Math.Ceiling(Convert.ToDouble(db.tbl_images.ToList().Count()) / 5); //here we divid the total pages by page size then we used math.celling method to get the upper value (e.g 11/5=2.2, the upper value here is 3 so with math.celling we get 11/5=3)
             return PartialView(db.tbl_images.Take(5));
         }
 
@@ -148,37 +164,52 @@ namespace OmxTechNet.Controllers
         {
             ViewBag.CurrentPage = CurrentPage; //to update the viewbage with the new values
             ViewBag.LastPage = LastPage;
-            return PartialView("_imageList",db.tbl_images.OrderBy(x => x.imgid).Skip((CurrentPage - 1) * 5).Take(5));
+            return PartialView("_imageList", db.tbl_images.OrderBy(x => x.imgid).Skip((CurrentPage - 1) * 5).Take(5));
         }
         //TODO: Get Image List
         public ActionResult imageList()
         {
             ViewBag.CurrentPage = 1;
-            return PartialView("imageList",db.tbl_images.Take(5));
+            return PartialView("imageList", db.tbl_images.Take(5));
         }
         [HttpPost]
         public ActionResult imageLis(int CurrentPage)
         {
             ViewBag.CurrentPage = CurrentPage;
-            return PartialView("imageList", db.tbl_images.OrderBy(x=>x.imgid).Skip((CurrentPage - 1) * 5).Take(5));
+            return PartialView("imageList", db.tbl_images.OrderBy(x => x.imgid).Skip((CurrentPage - 1) * 5).Take(5));
         }
 
         //TODO:Display Site Logo
         public ActionResult DisplaySiteLogoImg()
         {
-            var getsitelog = db.tbl_images.Where(x => x.imgrole == "SiteLogo").FirstOrDefault();
-            return PartialView("_siteimg",getsitelog);
+
+          //int getCount = db.tbl_images.Where(x => x.imgrole == "SiteLogo").Count();
+           // if (getCount >0)
+           // {
+                var getsitelog = db.tbl_images.Where(x => x.imgrole == "SiteLogo").FirstOrDefault();
+                return PartialView("_siteimg", getsitelog);
+            //}
+           
         }
         //TODO:Save Site Logo
         //TODO:Display Site Logo
         [HttpPost]
         public JsonResult SaveSiteLogoImg(string imgurl)
         {
-            tbl_image myimg =db.tbl_images.Where(x=>x.imgrole =="SiteLogo").FirstOrDefault();
+            //TODO:find if there is any sitelog added before
+            int getLog= db.tbl_images.Where(x => x.imgrole == "SiteLogo").Count();
+            if(getLog == 0)
+            {
+                tbl_image getlog = db.tbl_images.Where(x => x.imgurl_lg == imgurl).FirstOrDefault();
+                getlog.imgrole = "SiteLogo";
+                db.SaveChanges();
+            }
+
+            tbl_image myimg = db.tbl_images.Where(x => x.imgrole == "SiteLogo").FirstOrDefault();
             myimg.imgurl_lg = imgurl;
             db.SaveChanges();
 
-            return Json("الحمد لله رب العالمين",JsonRequestBehavior.AllowGet);
+            return Json("الحمد لله رب العالمين", JsonRequestBehavior.AllowGet);
         }
 
     }

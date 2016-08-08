@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using OMXPro.Models;
 using OMXPro.Models;
 
-namespace OmxTechNet.Controllers
+namespace OMXPro.Controllers
 {
     public class SectionsController : Controller
     {

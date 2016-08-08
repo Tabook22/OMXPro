@@ -51,7 +51,7 @@
                                     grid.Column("Name", "Title"),
                                     grid.Column("Link", "Url"),
                                     grid.Column("Order", "Order"),
-                                    grid.Column(header: "Image", format: @<text><img id="socialImg" src="@item.Img" style="width:50px;" /> </text>),
+                                    grid.Column(header: "Image", format: @<text><i class="@item.Img" style="width:50px;" /> </text>),
                                     grid.Column(header: "Edit", format:@<text><a id="btnSlectItem" class="sedit" data-itemid="@item.Id">Edit</a></text>)
                            )
                       )
@@ -112,7 +112,17 @@
                     <tr>
 
                         <td>
-                            fa fa-twitter-square
+                            fa fa-twitter fa-3x
+                        </td>
+                        <td>
+                            <img src="~/Content/AdminPages/images/Socials/vector-free-social-media-icons_32.png" />
+                          
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            fa fa-twitter-square fa-3x
                         </td>
                         <td>
                             <img src="~/Content/AdminPages/images/Socials/vector-free-social-media-icons_19.png" />
@@ -121,7 +131,7 @@
                     <tr>
 
                         <td>
-                            fa fa-facebook-square
+                            fa fa-facebook-square fa-3x
                         </td>
                         <td>
 
@@ -131,7 +141,7 @@
                     <tr>
 
                         <td>
-                            fa fa-youtube-square
+                            fa fa-youtube-square fa-3x
                         </td>
                         <td>
 
@@ -141,7 +151,7 @@
                     <tr>
 
                         <td>
-                            fa fa-linkedin-square
+                            fa fa-linkedin-square fa-3x
                         </td>
                         <td>
                             <img src="~/Content/AdminPages/images/Socials/vector-free-social-media-icons_20.png" />

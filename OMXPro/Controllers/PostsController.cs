@@ -7,7 +7,7 @@ using System.Data.Entity;
 using OMXPro.Models;
 
 
-namespace OmxTechNet.Controllers
+namespace OMXPro.Controllers
 {
 
     public class PostsController : Controller

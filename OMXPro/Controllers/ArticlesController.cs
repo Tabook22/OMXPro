@@ -77,8 +77,7 @@ namespace OMXPro.Controllers
                         a_loc = item.a_loc,
                         a_status = item.a_status
                     });
-                }
-           
+                }         
             return objArt;
         }
         //---------------------------------------------------------------------------------------------------------------------

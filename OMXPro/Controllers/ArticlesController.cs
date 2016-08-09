@@ -108,6 +108,7 @@ namespace OMXPro.Controllers
             }
             return RedirectToAction("ArticleSettings");
         }
+
         //---------------------------------------------------------------------------------------------------------------------
         ////Post: New Article
         //[HttpPost]
@@ -247,6 +248,7 @@ namespace OMXPro.Controllers
         {
             return RedirectToAction("ArticleSettings");
         }
+
         //public ActionResult GetPostData(int page = 1, string sort = "post_title", string sortdir = "DESC")
         //{
         //    PostDataModel cdm = new PostDataModel();

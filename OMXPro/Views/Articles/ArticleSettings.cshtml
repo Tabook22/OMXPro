@@ -34,14 +34,18 @@
 
                         <a href='@Url.Action("ArticleSettings","Articles")' class="fa fa-newspaper-o btn btn-default">Show All</a>
                     </div>
+
+                    <!--This form is used to search the list of articles-->
                     @using (Html.BeginForm("ArticleSettings", "Articles", FormMethod.Post))
                     {
                         <table border="0">
                             <tr>
-                                <td align="right">
-                                    Article Title: @Html.TextBox("SearchKey", "")
+                                <td align="left">
+                                    Article Title: @Html.TextBox("SearchKey", "", new { @class = "form-control" })
                                 </td>
-
+                                <td>
+                                    @Html.DropDownList("secid", (SelectList)ViewBag.mysections, "- Select Sections -", new { @class = "form-control" })
+                                </td>
                                
                                 <td align="left">
                                     <button type="submit" class="btn btn-default">
@@ -52,6 +56,8 @@
                             </tr>
                         </table>
                     }
+
+                    <!--Display the list of articles-->
                     <hr />
                     @using (Html.BeginForm("DeleteArticles", "Articles", FormMethod.Post))
                     {
@@ -82,3 +88,25 @@
 
     </div>
 </div>
+<script>
+    $(function () {
+        $('#secid option[value="3"]').css({ "border-bottom": "1px solid #222", "padding-bottom": "10px" });
+        $('#secid option[value="6"]').css({ "border-bottom": "1px solid #222", "padding-bottom": "10px" });
+        $('#secid option[value="9"]').css({ "border-bottom": "1px solid #222", "padding-bottom": "10px" });
+        $('#secid option[value="1"]').css("background-color", "#F0F0F0");
+        $('#secid option[value="2"]').css("background-color", "#F0F0F0");
+        $('#secid option[value="3"]').css("background-color", "#F0F0F0");
+        $('#secid option[value="4"]').css("background-color", "#ccc");
+        $('#secid option[value="5"]').css("background-color", "#ccc");
+        $('#secid option[value="6"]').css("background-color", "#ccc");
+        $('#secid option[value="7"]').css("background-color", "#F0F0F0");
+        $('#secid option[value="8"]').css("background-color", "#F0F0F0");
+        $('#secid option[value="9"]').css("background-color", "#F0F0F0");
+        $('#secid option[value="10"]').css("background-color", "#ccc");
+        $('#secid option[value="11"]').css("background-color", "#ccc");
+        $('#secid option[value="12"]').css("background-color", "#ccc");
+        $('#secid option[value="13"]').css("background-color", "#ccc");
+    });
+
+</script>
+

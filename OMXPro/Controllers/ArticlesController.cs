@@ -25,7 +25,7 @@ namespace OMXPro.Controllers
             return View();
         }
 
-        //Get: here we are going to display a list of articles
+        //Get: here we are going to display a list of articles------------------------------------------------------------------
         public ActionResult ArticleSettings()
         {
             // this is used to fill the dropdownlist
@@ -41,22 +41,30 @@ namespace OMXPro.Controllers
             ////ViewBag.sections = new SelectList(db.tbl_siteSections, "secId", "sec_title");
             //return View(getArtLst);
 
-            List<tbl_article> arts = ArtData("");
+            List<tbl_article> arts = ArtData("", "");
             return View(arts);
         }
 
-        //TODO:Only display the result of the search
+        //TODO:Only display the result of the search-----------------------------------------------------------------------------
         [HttpPost]
-        public ActionResult ArticleSettings(string SearchKey)
+        public ActionResult ArticleSettings(string SearchKey, int? secid)
         {
-            List<tbl_article> arts = ArtData(SearchKey);          
+            var mydata = from se in db.tbl_sitesections
+                         select new { se.secId, se.sec_title };
+            SelectList mylist = new SelectList(mydata, "secId", "sec_title", secid);
+            ViewBag.mysections = mylist;
+
+            List<tbl_article> arts = ArtData(SearchKey,Convert.ToString(secid));
             return View(arts);
         }
 
-        //this function will return a list of search results, which then will be displied inside the article list
-        public List<tbl_article> ArtData(string SearchKey)
+        //this function will return a list of search results, which then will be displied inside the article list--------------
+        public List<tbl_article> ArtData(string SearchKey, string secid)
         {
             List<tbl_article> objArt = new List<tbl_article>();
+            if (String.IsNullOrEmpty(SearchKey) && String.IsNullOrEmpty(secid))
+            {
+               
                 var productItem = from data in db.tbl_articles
                                   where SearchKey == "" ? true : data.a_title.Contains(SearchKey)
                                   select data;
@@ -78,7 +86,77 @@ namespace OMXPro.Controllers
                         a_status = item.a_status
                     });
                 }
-           
+            }else if(String.IsNullOrEmpty(SearchKey) && !String.IsNullOrEmpty(secid))
+                {
+                var productItem = from data in db.tbl_articles
+                                  where data.a_loc.Equals(secid)
+                                  select data;
+                foreach (var item in productItem)
+                {
+                    objArt.Add(new tbl_article
+                    {
+                        Id = item.Id,
+                        a_date = item.a_date,
+                        a_title = item.a_title,
+                        a_source = item.a_source,
+                        a_desc = item.a_desc,
+                        a_img = item.a_img,
+                        a_type = item.a_type,
+                        a_mediatype = item.a_mediatype,
+                        a_meidatype_link = item.a_meidatype_link,
+                        a_order = item.a_order,
+                        a_loc = item.a_loc,
+                        a_status = item.a_status
+                    });
+                }
+            }else if(!String.IsNullOrEmpty(SearchKey) && !String.IsNullOrEmpty(secid))
+            {
+                var productItem = from data in db.tbl_articles
+                                  where data.a_title.Contains(SearchKey) && data.a_loc.Equals(secid)
+                                  select data;
+                foreach (var item in productItem)
+                {
+                    objArt.Add(new tbl_article
+                    {
+                        Id = item.Id,
+                        a_date = item.a_date,
+                        a_title = item.a_title,
+                        a_source = item.a_source,
+                        a_desc = item.a_desc,
+                        a_img = item.a_img,
+                        a_type = item.a_type,
+                        a_mediatype = item.a_mediatype,
+                        a_meidatype_link = item.a_meidatype_link,
+                        a_order = item.a_order,
+                        a_loc = item.a_loc,
+                        a_status = item.a_status
+                    });
+                }
+            }else
+            {
+                var productItem = from data in db.tbl_articles
+                                  where data.a_title.Contains(SearchKey)
+                                  select data;
+                foreach (var item in productItem)
+                {
+                    objArt.Add(new tbl_article
+                    {
+                        Id = item.Id,
+                        a_date = item.a_date,
+                        a_title = item.a_title,
+                        a_source = item.a_source,
+                        a_desc = item.a_desc,
+                        a_img = item.a_img,
+                        a_type = item.a_type,
+                        a_mediatype = item.a_mediatype,
+                        a_meidatype_link = item.a_meidatype_link,
+                        a_order = item.a_order,
+                        a_loc = item.a_loc,
+                        a_status = item.a_status
+                    });
+                }
+            }
+
             return objArt;
         }
         //---------------------------------------------------------------------------------------------------------------------
@@ -109,6 +187,7 @@ namespace OMXPro.Controllers
             }
             return RedirectToAction("ArticleSettings");
         }
+
         //---------------------------------------------------------------------------------------------------------------------
         ////Post: New Article
         //[HttpPost]
@@ -248,6 +327,7 @@ namespace OMXPro.Controllers
         {
             return RedirectToAction("ArticleSettings");
         }
+
         //public ActionResult GetPostData(int page = 1, string sort = "post_title", string sortdir = "DESC")
         //{
         //    PostDataModel cdm = new PostDataModel();

@@ -1,0 +1,37 @@
+﻿
+<link href="~/Content/siteMenu.css" rel="stylesheet" />
+<script src="~/AngularJs/angular.js"></script>
+<script src="~/AngularJs/Module.js"></script>
+<script src="~/AngularJs/Service.js"></script>
+<script src="~/AngularJs/Controller.js"></script>
+
+
+@{
+    Layout = "";
+    ViewBag.Title = "Index";
+}
+
+<h2>Dynamic menu from database in AngularJS</h2>
+
+@* Html code for show nav menu here, for mak the application simple
+    I will add ngapp and ngcontroller here *@
+
+<div ng-app="MyApp">
+    <div ng-controller="menuController">
+        @* Here first of all we will create a ng-template *@
+        <script type="text/ng-template" id="treeMenu">
+            <a href="{{menu.URL}}">{{menu.MenuName}}</a>
+            @* We will create submenu only when available *@
+            <ul ng-if="(SiteMenu | filter:{ParentId : menu.ID}).length > 0">
+                <li ng-repeat="menu in SiteMenu | filter:{ParentId : menu.ID}" ng-include="'treeMenu'"></li>
+            </ul>
+        </script>
+
+        <ul class="main-navigation">
+            @* Here we will load only top level menu *@
+            <li ng-repeat="menu in SiteMenu | filter:{ParentId : 0}" ng-include="'treeMenu'"></li>
+        </ul>
+
+    </div>
+</div>
+

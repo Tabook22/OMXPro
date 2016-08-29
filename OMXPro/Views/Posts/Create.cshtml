@@ -26,6 +26,10 @@
     .clearfix {
         zoom: 1; /* ie 6/7 */
     }
+      #ilst img{
+        width:10rem;
+        max-height:40rem;
+    }
 
     /*.clearfix:after {
        content: ".";
@@ -74,13 +78,17 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.post_img, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    <div class="col-md-8 ">
+                                    <div class="col-md-6 ">
                                         @Html.EditorFor(model => model.post_img, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.post_img, "", new { @class = "text-danger" })
                                     </div>
-                                        <div class="col-md-3">
-                                            <img src="" alt="" id="pimg" class="img-responsive position:absolute" />
-                                        </div>
+                                    <div class="col-md-2">
+                                        <button id="btnImgLst" class="btn btn-primary btn-sm" title="Share this content" data-toggle="modal" data-target="#myModal1">
+                                            <i class="fa fa-file-image-o"></i>Select Image
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <img src="" alt="" id="pimg" class="img-responsive position:absolute" />
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -115,88 +123,139 @@
 
         </div>
     </div>
+
+    <!-- Modal Select Image -->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:silver">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><i class="fa fa-share-alt"></i>Itme Image List</h4>
+                </div>
+                <div class="modal-body" style="height:40rem;overflow-y:scroll;">
+                    <div id="ItemImgList">
+
+                    </div>
+                </div>
+                <div class="modal-footer" style="background-color:silver">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 @section Scripts{
     <script type="text/javascript">
 
         //this function will display the image when we change the post_img filed
         $('#pimg').attr("src", $('#post_img').val());
-            //$('#post_img').change(function () { console.log("الحمد لله رب العالمين"); });
-            $('#post_img').on("change", function () {
-                $('#pimg').attr("src", $('#post_img').val());
-            });
+        //$('#post_img').change(function () { console.log("الحمد لله رب العالمين"); });
+        $('#post_img').on("change", function () {
+            $('#pimg').attr("src", $('#post_img').val());
+        });
 
 
-  //tinymce.init({
-  //    selector: '#post_content'
-  //});
-  tinyMCE.init({
-      mode: "textareas",
-      editor_selector: "postcontent",
-      height: 500,
-      plugins: [
-        "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",
-        "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-        "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
-      ],
+        //tinymce.init({
+        //    selector: '#post_content'
+        //});
+        tinyMCE.init({
+            mode: "textareas",
+            editor_selector: "postcontent",
+            height: 500,
+            plugins: [
+              "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",
+              "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+              "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+            ],
 
-      toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
-      toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
-      toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+            toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+            toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+            toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
 
-      menubar: false,
-      toolbar_items_size: 'small',
+            menubar: false,
+            toolbar_items_size: 'small',
 
-      style_formats: [{
-          title: 'Bold text',
-          inline: 'b'
-      }, {
-          title: 'Red text',
-          inline: 'span',
-          styles: {
-              color: '#ff0000'
-          }
-      }, {
-          title: 'Red header',
-          block: 'h1',
-          styles: {
-              color: '#ff0000'
-          }
-      }, {
-          title: 'Example 1',
-          inline: 'span',
-          classes: 'example1'
-      }, {
-          title: 'Example 2',
-          inline: 'span',
-          classes: 'example2'
-      }, {
-          title: 'Table styles'
-      }, {
-          title: 'Table row 1',
-          selector: 'tr',
-          classes: 'tablerow1'
-      }],
+            style_formats: [{
+                title: 'Bold text',
+                inline: 'b'
+            }, {
+                title: 'Red text',
+                inline: 'span',
+                styles: {
+                    color: '#ff0000'
+                }
+            }, {
+                title: 'Red header',
+                block: 'h1',
+                styles: {
+                    color: '#ff0000'
+                }
+            }, {
+                title: 'Example 1',
+                inline: 'span',
+                classes: 'example1'
+            }, {
+                title: 'Example 2',
+                inline: 'span',
+                classes: 'example2'
+            }, {
+                title: 'Table styles'
+            }, {
+                title: 'Table row 1',
+                selector: 'tr',
+                classes: 'tablerow1'
+            }],
 
-      templates: [{
-          title: 'Test template 1',
-          content: 'Test 1'
-      }, {
-          title: 'Test template 2',
-          content: 'Test 2'
-      }],
-      content_css: [
-        '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
-        '//www.tinymce.com/css/codepen.min.css'
-      ]
-  });
+            templates: [{
+                title: 'Test template 1',
+                content: 'Test 1'
+            }, {
+                title: 'Test template 2',
+                content: 'Test 2'
+            }],
+            content_css: [
+              '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+              '//www.tinymce.com/css/codepen.min.css'
+            ]
+        });
 
-  tinyMCE.init({
-      mode: "textareas",
-      theme: "modern",
-      editor_selector: "pstsummary"
-  });
+        tinyMCE.init({
+            mode: "textareas",
+            theme: "modern",
+            editor_selector: "pstsummary"
+        });
 
     </script>
-
+<script>
+        $(function () {
+            $("#btnImgLst").on("click", function () {
+                $.ajax({
+                    url: "/Images/getItmImages",
+                    type: "GET",
+                    data: "{}",
+                    dataType: "json",
+                    success: function (data) {
+                        var output = $("#ItemImgList");
+                        output.empty();
+                        for (var i = 0; i < data.getImgLst.length ; i++) {
+                            var imglst = data.getImgLst[i];
+                                output.append("<table id=" + "ilst" + " class=" + "table" + ">" +
+                                "<tr class=" + "hdr" + ">" +
+                                "<th>Item Image</th>" +
+                                "<th>Item Image</th>" +
+                                "</tr>" +
+                                "<tr>" +
+                                "<td>"+imglst +  "</td>" +
+                                "<td><img class='selItmLst img-responsive' src=" + imglst + " /></td>" +
+                                "</tr></table>");
+                        }
+                    },
+                    error: function () {
+                        alert("Error!");
+                    }
+                });
+            });
+        });
+</script>
 }

@@ -83,7 +83,6 @@ namespace OMXPro.Controllers
         }
 
         //TODO:Get Socials
-        //TODO:Add Site Logo
         public ActionResult siteSocials()
         {
 
@@ -92,6 +91,21 @@ namespace OMXPro.Controllers
                                select a).ToList();
 
             return PartialView("_Socials", getsitesocials);
+        }
+
+        public ActionResult testMenu()
+        {
+            return View();
+        }
+
+        //TODO:site menu
+        public JsonResult GetSiteMenu()
+        {
+            using (OmxtechDbContext db = new OmxtechDbContext())
+            {
+                var menu = db.tbl_navmenu.ToList();
+                return new JsonResult { Data = menu, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            }
         }
     }
 }

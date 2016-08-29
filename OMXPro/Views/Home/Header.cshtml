@@ -54,7 +54,30 @@
                                             <span class="icon-bar"></span>
                                         </button>
                                         <nav class="collapse collapsing navbar-collapse">
-                                            <ul class="nav navbar-nav navbar-center">
+
+                                            @* Html code for show nav menu here, for mak the application simple
+        I will add ngapp and ngcontroller here *@
+                                            <div ng-app="MyApp">
+                                                <div ng-controller="menuController">
+                                                    @* Here first of all we will create a ng-template *@
+                                                    <script type="text/ng-template" id="treeMenu">
+                                                        <a href="{{menu.URL}}">{{menu.MenuName}}</a>
+                                                        @* We will create submenu only when available *@
+                                                        <ul ng-if="(SiteMenu | filter:{ParentId : menu.ID}).length > 0">
+                                                            @*<li ng-repeat="menu in SiteMenu | filter:{ParentID : menu.ID}" ng-include="'treeMenu'"></li>*@
+                                                            <li ng-repeat="menu in SiteMenu | filter:{ParentId : menu.ID} : true" ng-include="'treeMenu'"></li>
+                                                        </ul>
+                                                    </script>
+                                                    <ul class="main-navigation">
+                                                        @* Here we will load only top level menu *@
+                                                        @*<li ng-repeat="menu in SiteMenu | filter:{ParentID : 0}" ng-include="'treeMenu'"></li>*@
+                                                        <li ng-repeat="menu in SiteMenu | filter:{ParentId : 0} : true" ng-include="'treeMenu'"></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                          
+
+                                            @*<ul class="nav navbar-nav navbar-center">
 
                                                 <li class="tb-megamenu-item level-1 mega mega-align-center dropdown parent">
                                                     <a class="" href="/our-products">
@@ -97,7 +120,7 @@
                                                     </a>
 
                                                 </li>
-                                            </ul>
+                                            </ul>*@
                                         </nav>
                                     </div>
                                 </div>

@@ -5,23 +5,23 @@
 <div class="row">
     @foreach (var itm in Model)
     {
-        <div class="col-lg-4">
+        <div class="col-lg-4" style="padding-bottom:20px;">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;">
-                <div class="marketing-top-img" style="width:200px;height:200px;display:inline-block; text-align:center;">
+                <div class="marketing-top-img" style="width:200px;display:inline-block; text-align:center;">
 
                     <img class="" src='@Url.Content(@itm.a_img)' alt="Generic placeholder image">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center;">
-                <div class="text-center"><h3 class="title">@itm.a_title</h3></div>
-            <p class="rtecenter">
+                <div class="text-center" style="height:60px;"><h3 class="title">@itm.a_title</h3></div>
+            <p class="rtecenter" style="height:180px;overflow:hidden;">
                 <span style="color:#999999;">
                     <span style="font-size:16px;">
                         @itm.a_desc
                     </span>
                 </span>
             </p>
-            <a class="btn-primary btn btn-border" style=" text-align:center;" href="/our-products"> Read more</a>
+            <a class="btn-primary btn btn-border" style="text-align:center; color:#fff;" href="/our-products"> Read more</a>
 
         </div><!-- /.col-lg-4 -->
     </div>

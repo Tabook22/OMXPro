@@ -209,6 +209,10 @@
     <Compile Include="ViewModels\VMHeader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AngularJs\angular.js" />
+    <Content Include="AngularJs\Controller.js" />
+    <Content Include="AngularJs\Module.js" />
+    <Content Include="AngularJs\Service.js" />
     <Content Include="Content\AdminPages\bootstrap\css\bootstrap.css" />
     <Content Include="Content\AdminPages\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\AdminPages\bootstrap\fonts\glyphicons-halflings-regular.svg" />
@@ -357,6 +361,7 @@
     <Content Include="Content\SiteCustom.css" />
     <Content Include="Content\css\font-awesome.css" />
     <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\siteMenu.css" />
     <Content Include="Content\slick-theme.css" />
     <Content Include="Content\slick.css" />
     <Content Include="favicon.ico" />
@@ -706,6 +711,7 @@
     <Content Include="Views\Shared\_imageList.cshtml" />
     <Content Include="Views\Images\_siteimg.cshtml" />
     <Content Include="Views\Home\_Socials.cshtml" />
+    <Content Include="Views\Home\testMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
